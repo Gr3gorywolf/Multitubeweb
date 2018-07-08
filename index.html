@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>Multitube web</title>
+<title id='pillinn'>Multitube web</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
 </head>
@@ -306,7 +306,7 @@ numerito=parseInt(texto) ;
 }else{
     numerito=parseInt(texto.id)
     }
-
+    document.getElementById('pillinn').innerText= "Multitube web ►"+ nombreses[numerito].toString();
   if(archivitos[numerito].endsWith(".mp3") ){
   document.getElementById("reproductor").src=archivitos[numerito];
   document.getElementById("reproductor").load();
