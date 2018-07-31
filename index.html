@@ -250,9 +250,40 @@ document.getElementById("search").value=nombreses[numerito];
 
 
 
-document.getElementById("reproductorvideo").src=archivitos[numerito];
-document.getElementById("reproductorvideo").load();
+
+
+
+
+
+
+var req = new XMLHttpRequest();
+req.open('GET', archivitos[numerito], true);
+req.responseType = 'blob';
+
+req.onload = function() {
+   // Onload is triggered even on 404
+   // so we need to check the status code
+   if (this.status === 200) {
+      var videoBlob = this.response;
+      var vid = URL.createObjectURL(videoBlob); // IE10+
+      // Video is now downloaded
+      // and we can set it as source on the video element
+      document.getElementById("reproductorvideo").src = vid;
+      document.getElementById("reproductorvideo").load();
 document.getElementById("reproductorvideo").play();
+   }
+}
+req.onerror = function() {
+   // Error
+}
+
+req.send();
+
+
+
+/*document.getElementById("reproductorvideo").src=archivitos[numerito];
+document.getElementById("reproductorvideo").load();
+document.getElementById("reproductorvideo").play();*/
 lastof=numerito;
 document.getElementById("reproductor").src="";
 document.getElementById("reproductorvideo").onended=function(){
@@ -307,9 +338,43 @@ numerito=parseInt(texto) ;
     }
     document.getElementById('pillinn').innerText= "Multitube web ►"+ nombreses[numerito].toString();
   if(archivitos[numerito].endsWith(".mp3") ){
+
+
+
+
+
+
+
+
+
+var req = new XMLHttpRequest();
+req.open('GET', archivitos[numerito], true);
+req.responseType = 'blob';
+
+req.onload = function() {
+   // Onload is triggered even on 404
+   // so we need to check the status code
+   if (this.status === 200) {
+      var videoBlob = this.response;
+      var vid = URL.createObjectURL(videoBlob); // IE10+
+      // Video is now downloaded
+      // and we can set it as source on the video element
+      document.getElementById("reproductor").src = vid;
+      document.getElementById("reproductor").load();
+document.getElementById("reproductor").play();
+   }
+}
+req.onerror = function() {
+   // Error
+}
+
+req.send();
+
+/*
   document.getElementById("reproductor").src=archivitos[numerito];
   document.getElementById("reproductor").load();
 document.getElementById("reproductor").play();
+*/
   lastof=numerito;
 
 
