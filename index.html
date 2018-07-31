@@ -18,7 +18,7 @@
 <body style="margin-top: 65px;" >
     
     
-    <div class="preloader-wrapper big active" id="progress" style="position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;" >
+    <div class="preloader-wrapper big active" id="progress" style="position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;z-index:9999999 ;" >
         <div class="spinner-layer spinner-red-only">
           <div class="circle-clipper left">
             <div class="circle"></div>
@@ -260,6 +260,7 @@ var req = new XMLHttpRequest();
 req.open('GET', archivitos[numerito], true);
 req.responseType = 'blob';
 
+document.getElementById("progress").display="initial";
 req.onload = function() {
    // Onload is triggered even on 404
    // so we need to check the status code
@@ -271,10 +272,12 @@ req.onload = function() {
       document.getElementById("reproductorvideo").src = vid;
       document.getElementById("reproductorvideo").load();
 document.getElementById("reproductorvideo").play();
+document.getElementById("progress").display="hidden";
    }
 }
 req.onerror = function() {
    // Error
+   document.getElementById("progress").display="hidden";
 }
 
 req.send();
@@ -615,7 +618,7 @@ adicionarvideo("/.gr3cache/downloaded.gr3d2");
 //document.body.style="";
  document.body.innerHTML+=" <audio controls autoplay preload='auto' class='reproductor' id='reproductor' style='z-index:5000; position: fixed;top: 90% ;   display: flex;opacity: 1 ; width:100%;height: 10%;'/>";
 //division.cl
-document.getElementById("progress").remove();
+document.getElementById("progress").display="hidden";
 document.getElementById("boton").style.display="initial";
 
 
