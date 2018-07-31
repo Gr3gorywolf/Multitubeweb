@@ -260,7 +260,7 @@ var req = new XMLHttpRequest();
 req.open('GET', archivitos[numerito], true);
 req.responseType = 'blob';
 
-document.body.innerHTML+= "<div class='preloader-wrapper big active' id='progress' style='position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;z-index:9999999 ;' ><div class='spinner-layer spinner-red-only'><div class='circle-clipper left'> <div class='circle'></div></div><div class='gap-patch'> <div class='circle'></div> </div><div class='circle-clipper right'> <div class='circle'></div> </div> </div></div>";
+//document.body.innerHTML+= "<div class='preloader-wrapper big active' id='progress' style='position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;z-index:9999999 ;' ><div class='spinner-layer spinner-red-only'><div class='circle-clipper left'> <div class='circle'></div></div><div class='gap-patch'> <div class='circle'></div> </div><div class='circle-clipper right'> <div class='circle'></div> </div> </div></div>";
 req.onload = function() {
    // Onload is triggered even on 404
    // so we need to check the status code
@@ -272,12 +272,12 @@ req.onload = function() {
       document.getElementById("reproductorvideo").src = vid;
       document.getElementById("reproductorvideo").load();
 document.getElementById("reproductorvideo").play();
-document.getElementById("progress").remove();
+//document.getElementById("progress").remove();
    }
 }
 req.onerror = function() {
    // Error
-   document.getElementById("progress").remove();
+  // document.getElementById("progress").remove();
 }
 
 req.send();
