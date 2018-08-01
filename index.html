@@ -523,10 +523,7 @@ imaginacion.splice(indice,1);
     rawFile.send(null);
     filtrar();
 
-    var reqo = new XMLHttpRequest();
-    reqo.open('GET', "meconecte()>>>>>>", true);
-   reqo.responseType = 'blob';
-   reqo.send();
+  
   
 }
 
@@ -642,10 +639,15 @@ document.getElementById("boton").style.display="initial";
     rawFile.send(null);
 }
 var encargar=function(){
+
+
+
+    var reqo = new XMLHttpRequest();
+    reqo.open('GET', "/&&querry&&meconecte",true);
+   reqo.send();
     readTextFile("/.gr3cache/downloaded.gr3d");
 
 }
-
 
 
 
@@ -674,6 +676,12 @@ setTimeout(function(){ document.getElementById('reproductor').pause(); }, 3000);
 
 window.onload=encargar;
 
+window.onbeforeunload = function(event) {
+  var reqoo = new XMLHttpRequest();
+    reqoo.open('GET', "/&&querry&&medesconecte",true);
+   reqoo.send();
+    event.returnValue = true;
+};
 
  
 
