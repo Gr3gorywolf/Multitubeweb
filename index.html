@@ -353,7 +353,7 @@ numerito=parseInt(texto) ;
 var req = new XMLHttpRequest();
 req.open('GET', archivitos[numerito], true);
 req.responseType = 'blob';
-
+/*
 req.onload = function() {
    // Onload is triggered even on 404
    // so we need to check the status code
@@ -372,12 +372,12 @@ req.onerror = function() {
 }
 
 req.send();
+*/
 
-/*
   document.getElementById("reproductor").src=archivitos[numerito];
   document.getElementById("reproductor").load();
 document.getElementById("reproductor").play();
-*/
+
   lastof=numerito;
 
 
