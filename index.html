@@ -17,7 +17,7 @@
 </header>
 <body style="margin-top: 65px;" >
     
-    
+    <img id='hiddenforever' style="display:none;">
     <div class="preloader-wrapper big active" id="progress" style="position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;z-index:9999999 ;" >
         <div class="spinner-layer spinner-red-only">
           <div class="circle-clipper left">
@@ -380,11 +380,19 @@ req.send();
 document.getElementById("reproductor").play();
 
   lastof=numerito;
+  var img=document.getElementById('hiddenforever');
+  img.src=imaginacion[lastof];
+  img.onload= function(){
+
   var colorThief = new ColorThief();
- var coloreses=colorThief.getColor(imaginacion[lastof]);
+ var coloreses=colorThief.getColor(img);
+ document.body.style="margin-top: 65px;background-color: rgba("+coloreses[0]+", "+coloreses[1]+", "+coloreses[2]+", 0.295);background-size:cover;content: '';z-index: -1;";
+  
+  }
+ // var myImage = URL.createObjectURL();
 
 
-  document.body.style="margin-top: 65px;background-color: rgba("+coloreses[0]+", "+coloreses[1]+", "+coloreses[2]+", 0.295);background-size:cover;content: '';z-index: -1;";
+
   
   
   document.getElementById("reproductor").onended=function(){
