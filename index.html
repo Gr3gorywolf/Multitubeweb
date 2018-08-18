@@ -48,6 +48,7 @@
 
 </footer>
 <script src='/.gr3cache/js/materialize.min.js'></script>
+<script src='/.gr3cache/js/color-thief.js'></script>
 </html>
 
 <style>
@@ -379,9 +380,11 @@ req.send();
 document.getElementById("reproductor").play();
 
   lastof=numerito;
+  var colorThief = new ColorThief();
+ var coloreses=colorThief.getColor(imaginacion[lastof]);
 
 
-  document.body.style="margin-top: 65px;background-color: rgba(0, 0, 0, 0.295);background-image:url('"+imaginacion[lastof]+"');background-size:cover;content: '';z-index: -1;";
+  document.body.style="margin-top: 65px;background-color: rgba("+coloreses[0]+", "+coloreses[1]+", "+coloreses[2]+", 0.295);background-size:cover;content: '';z-index: -1;";
   
   
   document.getElementById("reproductor").onended=function(){
