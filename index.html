@@ -472,9 +472,7 @@
       if (rawFile.readyState === 4) {
         if (rawFile.status === 200 || rawFile.status == 0) {
 
-          try {
-
-
+        
 
 
             var text = String(rawFile.response);
@@ -486,7 +484,7 @@
             console.log(klk);
             console.log(text.split("¤")[klk]);*/
               // console.log(text.split("¤")[klk]);
-
+              try {
               if (text.split("¤").sort()[klk].split("²")[0] != null) {
 
                 var nombre = text.split("¤").sort()[klk].split("²")[0];
@@ -532,12 +530,13 @@
                 //
 
               }
+            }catch(err){
 
+
+           }
 
             }
-          } catch (err) {
-
-          }
+         
         }
       }
     }
@@ -581,15 +580,15 @@
 
           document.getElementById("scroll").innerHTML += "<div class='row' id='tumama'  >";
           document.getElementById("scroll").innerHTML += "</div>"
-          try {
+         
             for (var klk in text.split("¤").sort()) {
 
               /*console.log("paso");
             console.log(klk);
             console.log(text.split("¤")[klk]);*/
               // console.log(text.split("¤")[klk]);
-
-              if (text.split("¤").sort()[klk].split("²")[0] != null) {
+              try {
+              if (text.split("¤").sort()[klk].split("²")[0] != null && text.trim()!='') {
 
                 var nombre = text.split("¤").sort()[klk].split("²")[0];
                 var link = text.split("¤").sort()[klk].split("²")[1];
@@ -636,13 +635,13 @@
                 //
 
               }
+            } catch (err) {
 
+
+}
 
             }
-          } catch (err) {
-
-
-          }
+        
           //document.body.style="";
           document.body.innerHTML += " <audio controls autoplay preload='auto' class='reproductor' id='reproductor' style='z-index:5000; position: fixed;top: 90% ;   display: flex;opacity: 1 ; width:100%;height: 10%;'/>";
           //division.cl
