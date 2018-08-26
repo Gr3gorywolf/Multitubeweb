@@ -1,40 +1,43 @@
-
- <!-- Compiled and minified CSS -->
+<!-- Compiled and minified CSS -->
 
 
 <html>
+
 <head>
-<title id='pillinn'>Multitube web</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+  <title id='pillinn'>Multitube web</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 </head>
 
 <link href="/.gr3cache/css/icon.css" rel="stylesheet">
 <link rel='stylesheet' href="/.gr3cache/css/materialize.min.css">
-<header id="cabeza" style="z-index:5000; position: fixed;width:100%;height: 20px;bottom:0px;top:0px;  -webkit-backface-visibility: hidden; " >
+<header id="cabeza" style="z-index:5000; position: fixed;width:100%;height: 20px;bottom:0px;top:0px;  -webkit-backface-visibility: hidden; ">
 
 
 </header>
-<body style="margin-top: 65px;" >
-    
-    <img id='hiddenforever' style="display:none;">
-    <div class="preloader-wrapper big active" id="progress" style="position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;z-index:9999999 ;" >
-        <div class="spinner-layer spinner-red-only">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div><div class="gap-patch">
-            <div class="circle"></div>
-          </div><div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
+
+<body style="margin-top: 65px;">
+
+  <img id='hiddenforever' style="display:none;">
+  <div class="preloader-wrapper big active" id="progress" style="position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;z-index:9999999 ;">
+    <div class="spinner-layer spinner-red-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
       </div>
-
-      <div class='scrollcampo' id='scroll'  style="z-index:2500;position:fixed;botton:0px;left: 0px;right: 0px;top: 0px;height: calc(94% - 115px);width:100% ;margin-top: 115px; overflow: auto;">
-
-
+      <div class="gap-patch">
+        <div class="circle"></div>
       </div>
-      
+      <div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class='scrollcampo' id='scroll' style="z-index:2500;position:fixed;botton:0px;left: 0px;right: 0px;top: 0px;height: calc(94% - 115px);width:100% ;margin-top: 115px; overflow: auto;">
+
+
+  </div>
+
 
 
 </body>
@@ -49,484 +52,494 @@
 </footer>
 <script src='/.gr3cache/js/materialize.min.js'></script>
 <script src='/.gr3cache/js/color-thief.js'></script>
+
 </html>
 
 <style>
-
   .two-line-ellipsis {
-        padding-left:2vw;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        width: 325px;
-        line-height: 25px;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        padding-top: 15px;
+    padding-left: 2vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 325px;
+    line-height: 25px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    padding-top: 15px;
+  }
+
+  @keyframes floating {
+    from {
+      transform: translate(0, 0px);
+    }
+    65% {
+      transform: translate(0, 15px);
+    }
+    to {
+      transform: translate(0, -0px);
+    }
+  }
+
+  @keyframes entrada {
+
+    from {
+
+      opacity: 0;
+
     }
 
-@keyframes floating {
-    from { transform: translate(0,  0px); }
-    65%  { transform: translate(0, 15px); }
-    to   { transform: translate(0, -0px); }    
-}
+    to {
+      opacity: 100;
 
-        @keyframes entrada {
-       
-       from {
-       
-       opacity:0;
-               
-      }
-      
-      to {
-      opacity:100;
-       
-      }
-        }
+    }
+  }
 </style>
 
 <script>
-document.body.style.overflow = "hidden";
-var archivitos=new Array();
-var imaginacion=new Array();
-var nombreses=new Array();
-var linkeses=new Array();
-var lastof=0;
-var totalmusic=0;
-var tipo="musica";
-var textofiltro="";
-var musica=true;
+  document.body.style.overflow = "hidden";
+  var archivitos = new Array();
+  var imaginacion = new Array();
+  var nombreses = new Array();
+  var linkeses = new Array();
+  var lastof = 0;
+  var totalmusic = 0;
+  var tipo = "musica";
+  var textofiltro = "";
+  var musica = true;
 
 
 
 
-function doesFileExist(urlToFile) {
-   return true;
-}
+  function doesFileExist(urlToFile) {
+    return true;
+  }
 
 
 
 
-function isMobileDevice() {
+  function isMobileDevice() {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-}
+  }
 
 
-if(isMobileDevice()){
+  if (isMobileDevice()) {
 
-   console.log("ahahahhahahahhahaha");
-}
+    console.log("ahahahhahahahhahaha");
+  }
 
-function notificar(nombre,link,imagen) {
-  if (Notification.permission !== "granted")
-    Notification.requestPermission();
-  else {
-    var notification = new Notification('Reproduciendo...', {
-      icon: imagen,
-      body: nombre,
-      
+  function notificar(nombre, link, imagen) {
+    if (Notification.permission !== "granted")
+      Notification.requestPermission();
+    else {
+      var notification = new Notification('Reproduciendo...', {
+        icon: imagen,
+        body: nombre,
+
+      });
+
+
+      notification.onclick = function () {
+        window.open(link);
+      };
+
+    }
+
+  }
+
+
+
+
+  function filtrar() {
+
+    var filtro = document.getElementById("search").value;
+
+
+
+
+    //document.body.innerHTML="";
+    //document.body.innerHTML+="<div class=row id=tumama  >";
+    // document.body.innerHTML+="</div>"
+
+    for (var klk in nombreses) {
+      var klkrudo = String(klk);
+
+      if (nombreses[klk].toLowerCase().includes(filtro.toLowerCase())) {
+        console.log("paseyklk");
+
+
+        if (!isMobileDevice()) {
+          document.getElementById(klkrudo).style.animationName = "entrada";
+          document.getElementById(klkrudo).style.animationDuration = "2s";
+        } else {
+
+          document.getElementById(klkrudo).style.animationName = "";
+          document.getElementById(klkrudo).style.animationDuration = "";
+        }
+
+        if (archivitos[klk].toLowerCase().endsWith('.mp4') && musica == false || archivitos[klk].toLowerCase().endsWith('.mp3') && musica == true) {
+          document.getElementById(klkrudo).style.display = "initial";
+        } else {
+          document.getElementById(klkrudo).style.display = "none";
+        }
+
+
+
+        //document.getElementById("tumama").innerHTML+="<div class='col s12 m6 l4 xl3 '><div class='card' id="+klk+" onclick='reproducir(this)'><div class='card-image'><img src='"+imagen+"' style='height:230px ;width:100%;'> <span class='card-title' style='background-color: rgba(0, 0, 0, 0.295);font-size:20px;' >"+nombre+"</span></div><div class='card-content'><p>"+link+"</p></div><div class='card-action'><a href='"+link+"'>Abrir en youtube</a></div></div></div>";
+      } else {
+        console.log("paseyklk");
+        if (!isMobileDevice()) {
+
+          document.getElementById(klkrudo).style.animationName = "entrada";
+          document.getElementById(klkrudo).style.animationDuration = "2s";
+        } else {
+
+          document.getElementById(klkrudo).style.animationName = "";
+          document.getElementById(klkrudo).style.animationDuration = "";
+        }
+        document.getElementById(klkrudo).style.display = "none"
+      }
+
+    }
+    console.log("paseyklk2");
+    //document.body.innerHTML+=" <video controls autoplay class='reproductor' id='reproductor' style='z-index:99999; position: fixed;top: 95% ;   display: flex;opacity: 1 ; width:100%;height: 5%;background: white;'/>"
+    //division.cl
+
+
+
+
+
+
+
+
+
+
+
+
+
+  }
+
+  function quitarvideo() {
+    //document.getElementById("shadow").remove();
+    document.getElementById("lupita").innerText = "search";
+    document.getElementById("reproductorvideo").remove();
+    //document.body.style.overflow = "scroll";
+    document.getElementById("search").disabled = false;
+    document.getElementById("search").value = textofiltro;
+    document.getElementById("search").style = "height:54px;";
+
+  }
+  function reproducirvideo(texto) {
+
+    var numerito = 0;
+    if (texto.id == null) {
+
+
+      numerito = texto;
+
+    } else {
+      numerito = parseInt(texto.id)
+    }
+
+    textofiltro = document.getElementById("search").value;
+    document.getElementById("search").style = "color:white; height:54px;";
+    document.getElementById("lupita").innerText = "arrow_back";
+    document.body.style.overflow = "hidden";
+    /*if(!esmobil){
+    
+    
+    
+    document.body.innerHTML+="<video autoplay  preload='auto' controls id='reproductorvideo' style='background-color:white;height:70%;width:70%; z-index:99999; position: fixed;top:15%; botton:15%;left:15%;right:15% margin: auto;'></video>";
+    }
+    else{
+    */
+    document.body.innerHTML += "<video autoplay  preload='auto' controls id='reproductorvideo' style='object-fit: fill;background-color:white;height:calc(100% - 65px );width:100%; z-index:5001; position: fixed;top:65px;'></video>";
+    //}
+    document.getElementById("search").disabled = true;
+    document.getElementById("search").value = nombreses[numerito];
+    //document.body.innerHTML+="<div id='shadow' style='background-color: rgba(0, 0, 0, 0.895);height:100%;width:100%;z-index:5000; position: fixed;bottom:0px;top:0px;'onclick='quitarvideo();' ></div>"
+
+
+
+
+
+
+
+
+
+    var req = new XMLHttpRequest();
+    req.open('GET', archivitos[numerito], true);
+    req.responseType = 'blob';
+
+    //document.body.innerHTML+= "<div class='preloader-wrapper big active' id='progress' style='position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;z-index:9999999 ;' ><div class='spinner-layer spinner-red-only'><div class='circle-clipper left'> <div class='circle'></div></div><div class='gap-patch'> <div class='circle'></div> </div><div class='circle-clipper right'> <div class='circle'></div> </div> </div></div>";
+    /*req.onload = function() {
+       // Onload is triggered even on 404
+       // so we need to check the status code
+       if (this.status === 200) {
+          var videoBlob = this.response;
+          var vid = URL.createObjectURL(videoBlob); // IE10+
+          // Video is now downloaded
+          // and we can set it as source on the video element
+          document.getElementById("reproductorvideo").src = vid;
+          document.getElementById("reproductorvideo").load();
+    document.getElementById("reproductorvideo").play();
+    //document.getElementById("progress").remove();
+       }
+    }
+    req.onerror = function() {
+       // Error
+      // document.getElementById("progress").remove();
+    }
+    
+    req.send();
+    */
+
+
+    document.getElementById("reproductorvideo").src = archivitos[numerito];
+    document.getElementById("reproductorvideo").load();
+    document.getElementById("reproductorvideo").play();
+    lastof = numerito;
+    document.getElementById("reproductor").src = "";
+    document.getElementById("reproductorvideo").onended = function () {
+      quitarvideo();
+      //  lastof++;
+      reproducir(lastof + 1);
+      // document.getElementById("reproductorvideo").src=;
+
+
+    }
+    if ('mediaSession' in navigator) {
+
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: nombreses[lastof],
+        artist: linkeses[lastof],
+
+        artwork: [
+          { src: imaginacion[lastof], sizes: '96x96', type: 'image/png' },
+          { src: imaginacion[lastof], sizes: '128x128', type: 'image/png' },
+          { src: imaginacion[lastof], sizes: '192x192', type: 'image/png' },
+          { src: imaginacion[lastof], sizes: '256x256', type: 'image/png' },
+          { src: imaginacion[lastof], sizes: '384x384', type: 'image/png' },
+          { src: imaginacion[lastof], sizes: '512x512', type: 'image/png' },
+        ]
+      });
+    }
+    navigator.mediaSession.setActionHandler('previoustrack', function () {
+      // User clicked "Previous Track" media notification icon.
+      reproducir(lastof - 1);
     });
-    
 
-    notification.onclick = function () {
-      window.open(link);      
-    };
+    navigator.mediaSession.setActionHandler('nexttrack', function () {
+      // User clicked "Next Track" media notification icon.
+      reproducir(lastof + 1);
+    });
+    var reproduc = document.getElementById("reproductorvideo");
+
+
+
+
 
   }
-
-}
-
+  function reproducir(texto) {
 
 
+    var numerito = 0;
+    if (texto.id == null) {
+      numerito = parseInt(texto);
 
-function filtrar(){
-
-    var filtro=document.getElementById("search").value;
-     
-
-
-
-//document.body.innerHTML="";
-  //document.body.innerHTML+="<div class=row id=tumama  >";
-               // document.body.innerHTML+="</div>"
-
-for( var klk in nombreses){
-    var klkrudo=String(klk);
-
- if(nombreses[klk].toLowerCase().includes(filtro.toLowerCase())){
-    console.log("paseyklk");  
-       
-
-       if(!isMobileDevice()){
-     document.getElementById(klkrudo).style.animationName="entrada";
-    document.getElementById(klkrudo).style.animationDuration="2s";
-  }else{
-
-document.getElementById(klkrudo).style.animationName="";
-document.getElementById(klkrudo).style.animationDuration="";
-}
-
-    if(archivitos[klk].toLowerCase().endsWith('.mp4') && musica==false ||  archivitos[klk].toLowerCase().endsWith('.mp3') && musica==true){
-      document.getElementById(klkrudo).style.display="initial";
-    }else{
-      document.getElementById(klkrudo).style.display="none";
+    } else {
+      numerito = parseInt(texto.id.toString().replace('r', ''))
     }
-    
+    document.getElementById('pillinn').innerText = "Multitube web ►" + nombreses[numerito].toString();
+    if (archivitos[numerito].endsWith(".mp3")) {
 
 
-  //document.getElementById("tumama").innerHTML+="<div class='col s12 m6 l4 xl3 '><div class='card' id="+klk+" onclick='reproducir(this)'><div class='card-image'><img src='"+imagen+"' style='height:230px ;width:100%;'> <span class='card-title' style='background-color: rgba(0, 0, 0, 0.295);font-size:20px;' >"+nombre+"</span></div><div class='card-content'><p>"+link+"</p></div><div class='card-action'><a href='"+link+"'>Abrir en youtube</a></div></div></div>";
-}else{
-    console.log("paseyklk");
-    if(!isMobileDevice()){
 
- document.getElementById(klkrudo).style.animationName="entrada";
-    document.getElementById(klkrudo).style.animationDuration="2s";
-  }else{
 
-     document.getElementById(klkrudo).style.animationName="";
-    document.getElementById(klkrudo).style.animationDuration="";
-  }
-  document.getElementById(klkrudo).style.display="none"
-}
 
-}
-console.log("paseyklk2");
- //document.body.innerHTML+=" <video controls autoplay class='reproductor' id='reproductor' style='z-index:99999; position: fixed;top: 95% ;   display: flex;opacity: 1 ; width:100%;height: 5%;background: white;'/>"
-//division.cl
 
 
 
 
-
-
-
-
-
-
-
-
-
-}
-
-function quitarvideo(){
-//document.getElementById("shadow").remove();
-document.getElementById("lupita").innerText="search";
-document.getElementById("reproductorvideo").remove();
-//document.body.style.overflow = "scroll";
-document.getElementById("search").disabled=false;
-document.getElementById("search").value=textofiltro;
-document.getElementById("search").style="height:54px;";
-
-}
-function reproducirvideo(texto){
-
- var numerito=0;
-if(texto.id==null){
-
-
-numerito=texto;
-
-}else{
-    numerito=parseInt(texto.id)
-    }
-
-textofiltro=document.getElementById("search").value;
-document.getElementById("search").style="color:white; height:54px;";
-document.getElementById("lupita").innerText="arrow_back";
-document.body.style.overflow = "hidden";
-/*if(!esmobil){
-
-
-
-document.body.innerHTML+="<video autoplay  preload='auto' controls id='reproductorvideo' style='background-color:white;height:70%;width:70%; z-index:99999; position: fixed;top:15%; botton:15%;left:15%;right:15% margin: auto;'></video>";
-}
-else{
-*/
-    document.body.innerHTML+="<video autoplay  preload='auto' controls id='reproductorvideo' style='object-fit: fill;background-color:white;height:calc(100% - 65px );width:100%; z-index:5001; position: fixed;top:65px;'></video>";
-//}
-document.getElementById("search").disabled=true;
-document.getElementById("search").value=nombreses[numerito];
-//document.body.innerHTML+="<div id='shadow' style='background-color: rgba(0, 0, 0, 0.895);height:100%;width:100%;z-index:5000; position: fixed;bottom:0px;top:0px;'onclick='quitarvideo();' ></div>"
-
-
-
-
-
-
-
-
-
-var req = new XMLHttpRequest();
-req.open('GET', archivitos[numerito], true);
-req.responseType = 'blob';
-
-//document.body.innerHTML+= "<div class='preloader-wrapper big active' id='progress' style='position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;z-index:9999999 ;' ><div class='spinner-layer spinner-red-only'><div class='circle-clipper left'> <div class='circle'></div></div><div class='gap-patch'> <div class='circle'></div> </div><div class='circle-clipper right'> <div class='circle'></div> </div> </div></div>";
-/*req.onload = function() {
-   // Onload is triggered even on 404
-   // so we need to check the status code
-   if (this.status === 200) {
-      var videoBlob = this.response;
-      var vid = URL.createObjectURL(videoBlob); // IE10+
-      // Video is now downloaded
-      // and we can set it as source on the video element
-      document.getElementById("reproductorvideo").src = vid;
-      document.getElementById("reproductorvideo").load();
-document.getElementById("reproductorvideo").play();
-//document.getElementById("progress").remove();
-   }
-}
-req.onerror = function() {
-   // Error
-  // document.getElementById("progress").remove();
-}
-
-req.send();
-*/
-
-
-document.getElementById("reproductorvideo").src=archivitos[numerito];
-document.getElementById("reproductorvideo").load();
-document.getElementById("reproductorvideo").play();
-lastof=numerito;
-document.getElementById("reproductor").src="";
-document.getElementById("reproductorvideo").onended=function(){
-    quitarvideo();
-  //  lastof++;
-reproducir(lastof+1);
-   // document.getElementById("reproductorvideo").src=;
-
-   
-}
-if ('mediaSession' in navigator) {
-
-navigator.mediaSession.metadata = new MediaMetadata({
-  title:nombreses[lastof],
-  artist: linkeses[lastof],
- 
-  artwork: [
-    { src: imaginacion[lastof],   sizes: '96x96',   type: 'image/png' },
-    { src: imaginacion[lastof], sizes: '128x128', type: 'image/png' },
-    { src: imaginacion[lastof], sizes: '192x192', type: 'image/png' },
-    { src: imaginacion[lastof], sizes: '256x256', type: 'image/png' },
-    { src: imaginacion[lastof], sizes: '384x384', type: 'image/png' },
-    { src: imaginacion[lastof], sizes: '512x512', type: 'image/png' },
-  ]
-});
-}
-navigator.mediaSession.setActionHandler('previoustrack', function() {
-  // User clicked "Previous Track" media notification icon.
-reproducir(lastof-1);
-});
-
-navigator.mediaSession.setActionHandler('nexttrack', function() {
-  // User clicked "Next Track" media notification icon.
-  reproducir(lastof+1);
-});
-var reproduc=document.getElementById("reproductorvideo");
-
-
-
-
-
-}
-function reproducir(texto){
-
-
- var numerito=0;
-if(texto.id==null){
-numerito=parseInt(texto) ;
-
-}else{
-    numerito=parseInt(texto.id.toString().replace('r',''))
-    }
-    document.getElementById('pillinn').innerText= "Multitube web ►"+ nombreses[numerito].toString();
-  if(archivitos[numerito].endsWith(".mp3") ){
-
-
-
-
-
-
-
-
-
-var req = new XMLHttpRequest();
-req.open('GET', archivitos[numerito], true);
-req.responseType = 'blob';
-/*
-req.onload = function() {
-   // Onload is triggered even on 404
-   // so we need to check the status code
-   if (this.status === 200) {
-      var videoBlob = this.response;
-      var vid = URL.createObjectURL(videoBlob); // IE10+
-      // Video is now downloaded
-      // and we can set it as source on the video element
-      document.getElementById("reproductor").src = vid;
-      document.getElementById("reproductor").load();
-document.getElementById("reproductor").play();
-   }
-}
-req.onerror = function() {
-   // Error
-}
-
-req.send();
-*/
-
-  document.getElementById("reproductor").src=archivitos[numerito];
-  document.getElementById("reproductor").load();
-document.getElementById("reproductor").play();
-
-  lastof=numerito;
-  var img=document.getElementById('hiddenforever');
-  img.src=imaginacion[lastof];
-  img.onload= function(){
-
-  var colorThief = new ColorThief();
- var coloreses=colorThief.getColor(img);
- document.body.style="margin-top: 65px;background-color: rgb("+coloreses[0]+", "+coloreses[1]+", "+coloreses[2]+");background-size:cover;content: '';z-index: -1;";
-  
-  }
- // var myImage = URL.createObjectURL();
-
-
-
-  
-  
-  document.getElementById("reproductor").onended=function(){
-    if((lastof+1)<=archivitos.length){
-
-              if(!archivitos[lastof+1].endsWith('.mp4')){
-
-                reproducir(lastof+1);
-              }
-        
-      //  document.body.style="margin-top: 65px;background-color: rgba(0, 0, 0, 0.295); background-image:url('"+imaginacion[lastof+1]+"');background-size:cover;content: '';z-index: -1;";
-     // lastof++;
-    }
-    
-
-  };
-
-if ('mediaSession' in navigator) {
-
-navigator.mediaSession.metadata = new MediaMetadata({
-  title:nombreses[lastof],
-  artist: linkeses[lastof],
- 
-  artwork: [
-    { src: imaginacion[lastof],   sizes: '96x96',   type: 'image/png' },
-    { src: imaginacion[lastof], sizes: '128x128', type: 'image/png' },
-    { src: imaginacion[lastof], sizes: '192x192', type: 'image/png' },
-    { src: imaginacion[lastof], sizes: '256x256', type: 'image/png' },
-    { src: imaginacion[lastof], sizes: '384x384', type: 'image/png' },
-    { src: imaginacion[lastof], sizes: '512x512', type: 'image/png' },
-  ]
-});
-}
-navigator.mediaSession.setActionHandler('previoustrack', function() {
-  // User clicked "Previous Track" media notification icon.
-reproducir(lastof-1);
-});
-
-navigator.mediaSession.setActionHandler('nexttrack', function() {
-  // User clicked "Next Track" media notification icon.
-  reproducir(lastof+1);
-});
-
-
-
-
-
-
-
-}else
-if(archivitos[numerito].endsWith(".mp4"))
-{
-
-
-    reproducirvideo(texto);
+      var req = new XMLHttpRequest();
+      req.open('GET', archivitos[numerito], true);
+      req.responseType = 'blob';
+      /*
+      req.onload = function() {
+         // Onload is triggered even on 404
+         // so we need to check the status code
+         if (this.status === 200) {
+            var videoBlob = this.response;
+            var vid = URL.createObjectURL(videoBlob); // IE10+
+            // Video is now downloaded
+            // and we can set it as source on the video element
+            document.getElementById("reproductor").src = vid;
+            document.getElementById("reproductor").load();
+      document.getElementById("reproductor").play();
+         }
+      }
+      req.onerror = function() {
+         // Error
+      }
       
+      req.send();
+      */
 
-}
+      document.getElementById("reproductor").src = archivitos[numerito];
+      document.getElementById("reproductor").load();
+      document.getElementById("reproductor").play();
 
-notificar(nombreses[numerito],linkeses[numerito],imaginacion[numerito]);
-}
+      lastof = numerito;
+      var img = document.getElementById('hiddenforever');
+      img.src = imaginacion[lastof];
+      img.onload = function () {
+
+        var colorThief = new ColorThief();
+        var coloreses = colorThief.getColor(img);
+        document.body.style = "margin-top: 65px;background-color: rgb(" + coloreses[0] + ", " + coloreses[1] + ", " + coloreses[2] + ");background-size:cover;content: '';z-index: -1;";
+
+      }
+      // var myImage = URL.createObjectURL();
 
 
 
-function adicionarvideo(file)
-{
+
+
+      document.getElementById("reproductor").onended = function () {
+        if ((lastof + 1) <= archivitos.length) {
+
+          if (!archivitos[lastof + 1].endsWith('.mp4')) {
+
+            reproducir(lastof + 1);
+          }
+
+          //  document.body.style="margin-top: 65px;background-color: rgba(0, 0, 0, 0.295); background-image:url('"+imaginacion[lastof+1]+"');background-size:cover;content: '';z-index: -1;";
+          // lastof++;
+        }
+
+
+      };
+
+      if ('mediaSession' in navigator) {
+
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: nombreses[lastof],
+          artist: linkeses[lastof],
+
+          artwork: [
+            { src: imaginacion[lastof], sizes: '96x96', type: 'image/png' },
+            { src: imaginacion[lastof], sizes: '128x128', type: 'image/png' },
+            { src: imaginacion[lastof], sizes: '192x192', type: 'image/png' },
+            { src: imaginacion[lastof], sizes: '256x256', type: 'image/png' },
+            { src: imaginacion[lastof], sizes: '384x384', type: 'image/png' },
+            { src: imaginacion[lastof], sizes: '512x512', type: 'image/png' },
+          ]
+        });
+      }
+      navigator.mediaSession.setActionHandler('previoustrack', function () {
+        // User clicked "Previous Track" media notification icon.
+        reproducir(lastof - 1);
+      });
+
+      navigator.mediaSession.setActionHandler('nexttrack', function () {
+        // User clicked "Next Track" media notification icon.
+        reproducir(lastof + 1);
+      });
+
+
+
+
+
+
+
+    } else
+      if (archivitos[numerito].endsWith(".mp4")) {
+
+
+        reproducirvideo(texto);
+
+
+      }
+
+    notificar(nombreses[numerito], linkeses[numerito], imaginacion[numerito]);
+  }
+
+
+
+  function adicionarvideo(file) {
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var text =String(rawFile.response) ;
-                text=text.substring(0,text.length-1);
-               
-for( var klk in text.split("¤").sort()){
- 
-    /*console.log("paso");
-  console.log(klk);
-  console.log(text.split("¤")[klk]);*/
- // console.log(text.split("¤")[klk]);
+    rawFile.onreadystatechange = function () {
+      if (rawFile.readyState === 4) {
+        if (rawFile.status === 200 || rawFile.status == 0) {
 
- if(text.split("¤").sort()[klk].split("²")[0]!=null){
-
-  var nombre=text.split("¤").sort()[klk].split("²")[0];
-  var link=text.split("¤").sort()[klk].split("²")[1];
-  var archivo=text.split("¤").sort()[klk].split("²")[2];
- 
- 
-  nombreses.push(nombre);
-  linkeses.push(link);
-  archivitos.push(archivo);
-  console.log(archivo);
-  var imagen="/.gr3cache/portraits/"+link.split("=")[1];
-  imaginacion.push(imagen);
-  var indice=totalmusic+parseInt(klk);
-  if(doesFileExist(archivitos[indice].toString())){
-  if(!isMobileDevice()){
-
-
- 
-  document.getElementById("tumama").innerHTML+="<div class='col s12 m6 l4 xl3 carta'id="+indice+"  style=' animation-name: entrada;animation-duration: 2s;'><div class='card' ><div class='card-image'><img src='"+imagen+"' style='height:230px ;width:100%;'> <span class='card-title' style='background-color: rgba(0, 0, 0, 0.295);font-size:16px;' >"+nombre+"</span></div><div class='card-action'><a onclick='abrirlink(this);' href='#' id='"+indice+"l'>Abrir en youtube</a> <a onclick='reproducir(this);' href='#' id='"+indice+"r'>Reproducir</a></div></div></div>";
-} 
-  else{
+          try {
 
 
 
-document.getElementById("tumama").innerHTML+="<div class='col s12 m12 l6 xl3 carta'id="+indice+" onclick='reproducir(this)' style=' animation-name: entrada;animation-duration: 2s;'><ul class='collection'> <li class='collection-item avatar' style='padding-top:20px;'><img src='"+imagen+"' alt='' class='circle'><div class='title' style='margin-top:10px;text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'>"+nombre+"</div><a href='#!' class='secondary-content'><i class='material-icons'>play</i></a><li><ul></div>";
 
-}
-}
-else{
+            var text = String(rawFile.response);
+            text = text.substring(0, text.length - 1);
 
-nombreses.splice(indice, 1);
-linkeses.splice(indice,1);
-archivitos.splice(indice,1);
-imaginacion.splice(indice,1);
+            for (var klk in text.split("¤").sort()) {
 
- }
+              /*console.log("paso");
+            console.log(klk);
+            console.log(text.split("¤")[klk]);*/
+              // console.log(text.split("¤")[klk]);
 
-  
-  
-  //document.getElementById("progress2").style.height=String((klk/text.split("¤").length)*100)+"%";
+              if (text.split("¤").sort()[klk].split("²")[0] != null) {
 
-  //
-  
-}
+                var nombre = text.split("¤").sort()[klk].split("²")[0];
+                var link = text.split("¤").sort()[klk].split("²")[1];
+                var archivo = text.split("¤").sort()[klk].split("²")[2];
 
 
-}
+                nombreses.push(nombre);
+                linkeses.push(link);
+                archivitos.push(archivo);
+                console.log(archivo);
+                var imagen = "/.gr3cache/portraits/" + link.split("=")[1];
+                imaginacion.push(imagen);
+                var indice = totalmusic + parseInt(klk);
+                if (doesFileExist(archivitos[indice].toString())) {
+                  if (!isMobileDevice()) {
+
+
+
+                    document.getElementById("tumama").innerHTML += "<div class='col s12 m6 l4 xl3 carta'id=" + indice + "  style=' animation-name: entrada;animation-duration: 2s;'><div class='card' ><div class='card-image'><img src='" + imagen + "' style='height:230px ;width:100%;'> <span class='card-title' style='background-color: rgba(0, 0, 0, 0.295);font-size:16px;' >" + nombre + "</span></div><div class='card-action'><a onclick='abrirlink(this);' href='#' id='" + indice + "l'>Abrir en youtube</a> <a onclick='reproducir(this);' href='#' id='" + indice + "r'>Reproducir</a></div></div></div>";
+                  }
+                  else {
+
+
+
+                    document.getElementById("tumama").innerHTML += "<div class='col s12 m12 l6 xl3 carta'id=" + indice + " onclick='reproducir(this)' style=' animation-name: entrada;animation-duration: 2s;'><ul class='collection'> <li class='collection-item avatar' style='padding-top:20px;'><img src='" + imagen + "' alt='' class='circle'><div class='title' style='margin-top:10px;text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'>" + nombre + "</div><a href='#!' class='secondary-content'><i class='material-icons'>play</i></a><li><ul></div>";
+
+                  }
+                }
+                else {
+
+                  nombreses.splice(indice, 1);
+                  linkeses.splice(indice, 1);
+                  archivitos.splice(indice, 1);
+                  imaginacion.splice(indice, 1);
+
+                }
+
+
+
+                //document.getElementById("progress2").style.height=String((klk/text.split("¤").length)*100)+"%";
+
+                //
+
+              }
+
+
             }
+          } catch (err) {
+
+          }
         }
+      }
     }
 
 
@@ -534,168 +547,166 @@ imaginacion.splice(indice,1);
     rawFile.send(null);
     filtrar();
 
-  
-  
-}
-
-function ponermusica(){
-  lastof=0;
-musica=true;
-filtrar();
-
-}
-
-function ponervideo(){
-  lastof=totalmusic+1;
-  musica=false;
-filtrar();
-
-}
 
 
+  }
 
-function readTextFile(file)
-{
+  function ponermusica() {
+    lastof = 0;
+    musica = true;
+    filtrar();
+
+  }
+
+  function ponervideo() {
+    lastof = totalmusic + 1;
+    musica = false;
+    filtrar();
+
+  }
+
+
+
+  function readTextFile(file) {
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var text =String(rawFile.response) ;
-                text=text.substring(0,text.length-1);
-               
-          
-        document.getElementById("cabeza").innerHTML+="<nav class='nav-extended' ><div class='nav-wrapper red' ><div class='input-field'><input id='search' type='search' autocomplete='off'   oninput='filtrar()' style='height: 54px;'><label class='label-icon' for='search'><i class='material-icons' id='lupita' onclick='quitarvideo();'style='cursor:default; href='#'>search</i></label></div></div> <div class='nav-content'><ul class='tabs red'><li class='tab'><a onclick='ponermusica()' style='color:white;' href='#test1'>Musica</a></li><li class='tab' onclick='ponervideo()'><a  class='active' style='color:white;' href='#test2'>Videos</a></li></ul></div>    </nav>"
-        
-            document.getElementById("scroll").innerHTML+="<div class='row' id='tumama'  >";
-                document.getElementById("scroll").innerHTML+="</div>"
-              
-for( var klk in text.split("¤").sort()){
- 
-    /*console.log("paso");
-  console.log(klk);
-  console.log(text.split("¤")[klk]);*/
- // console.log(text.split("¤")[klk]);
-
- if(text.split("¤").sort()[klk].split("²")[0]!=null){
-
-  var nombre=text.split("¤").sort()[klk].split("²")[0];
-  var link=text.split("¤").sort()[klk].split("²")[1];
-  var archivo=text.split("¤").sort()[klk].split("²")[2];
- 
-
-  nombreses.push(nombre);
-  linkeses.push(link);
-  archivitos.push(archivo);
-  console.log(archivo);
-  var imagen="/.gr3cache/portraits/"+link.split("=")[1];
-  imaginacion.push(imagen);
-  totalmusic++;
- // document.getElementById("tumama").innerHTML+="<div class='col s12 m6 l4 xl3 'id="+klk+" onclick='reproducir(this)' style=' animation-name: entrada;animation-duration: 2s;'><div class='card' ><div class='card-image'><img src='"+imagen+"' style='height:230px ;width:100%;'> <span class='card-title' style='background-color: rgba(0, 0, 0, 0.295);font-size:20px;' >"+nombre+"</span></div><div class='card-action'><a href='"+link+"'>Abrir en youtube</a></div></div></div>";
- if(doesFileExist(archivitos[klk].toString())){
- if(!isMobileDevice()){
+    rawFile.onreadystatechange = function () {
+      if (rawFile.readyState === 4) {
+        if (rawFile.status === 200 || rawFile.status == 0) {
+          var text = String(rawFile.response);
+          text = text.substring(0, text.length - 1);
 
 
- 
-document.getElementById("tumama").innerHTML+="<div class='col s12 m6 l4 xl3 carta'id="+klk+"  style=' animation-name: entrada;animation-duration: 2s;'><div class='card' ><div class='card-image'><img src='"+imagen+"' style='height:230px ;width:100%;'> <span class='card-title' style='background-color: rgba(0, 0, 0, 0.295);font-size:16px;' >"+nombre+"</span></div><div class='card-action'><a onclick='abrirlink(this);' href='#' id='"+klk+"l'>Abrir en youtube</a>  <a onclick='reproducir(this);' href='#' id='"+klk+"r'>Reproducir</a></div></div></div>";
-} 
-else{
+          document.getElementById("cabeza").innerHTML += "<nav class='nav-extended' ><div class='nav-wrapper red' ><div class='input-field'><input id='search' type='search' autocomplete='off'   oninput='filtrar()' style='height: 54px;'><label class='label-icon' for='search'><i class='material-icons' id='lupita' onclick='quitarvideo();'style='cursor:default; href='#'>search</i></label></div></div> <div class='nav-content'><ul class='tabs red'><li class='tab'><a onclick='ponermusica()' style='color:white;' href='#test1'>Musica</a></li><li class='tab' onclick='ponervideo()'><a  class='active' style='color:white;' href='#test2'>Videos</a></li></ul></div>    </nav>"
+
+          document.getElementById("scroll").innerHTML += "<div class='row' id='tumama'  >";
+          document.getElementById("scroll").innerHTML += "</div>"
+          try {
+            for (var klk in text.split("¤").sort()) {
+
+              /*console.log("paso");
+            console.log(klk);
+            console.log(text.split("¤")[klk]);*/
+              // console.log(text.split("¤")[klk]);
+
+              if (text.split("¤").sort()[klk].split("²")[0] != null) {
+
+                var nombre = text.split("¤").sort()[klk].split("²")[0];
+                var link = text.split("¤").sort()[klk].split("²")[1];
+                var archivo = text.split("¤").sort()[klk].split("²")[2];
+
+
+                nombreses.push(nombre);
+                linkeses.push(link);
+                archivitos.push(archivo);
+                console.log(archivo);
+                var imagen = "/.gr3cache/portraits/" + link.split("=")[1];
+                imaginacion.push(imagen);
+                totalmusic++;
+                // document.getElementById("tumama").innerHTML+="<div class='col s12 m6 l4 xl3 'id="+klk+" onclick='reproducir(this)' style=' animation-name: entrada;animation-duration: 2s;'><div class='card' ><div class='card-image'><img src='"+imagen+"' style='height:230px ;width:100%;'> <span class='card-title' style='background-color: rgba(0, 0, 0, 0.295);font-size:20px;' >"+nombre+"</span></div><div class='card-action'><a href='"+link+"'>Abrir en youtube</a></div></div></div>";
+                if (doesFileExist(archivitos[klk].toString())) {
+                  if (!isMobileDevice()) {
 
 
 
-document.getElementById("tumama").innerHTML+="<div class='col s12 m12 l6 xl3 carta'id="+klk+" onclick='reproducir(this)' style=' animation-name: entrada;animation-duration: 2s;'><ul class='collection'> <li class='collection-item avatar' style='padding-top:20px;'><img src='"+imagen+"' alt='' class='circle' ><div class='title' style='margin-top:10px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'>"+nombre+"</div><a href='#!' class='secondary-content'><i class='material-icons'>play</i></a><li><ul></div>";
-
-}
-
- 
- }
- else{
-
-   nombreses.splice(klk, 1);
-   linkeses.splice(klk,1);
-   archivitos.splice(klk,1);
-   imaginacion.splice(klk,1);
-   totalmusic--;
-    }
- 
- 
-  //document.getElementById("progress2").style.height=String((klk/text.split("¤").length)*100)+"%";
-
-  //
-  
-}
+                    document.getElementById("tumama").innerHTML += "<div class='col s12 m6 l4 xl3 carta'id=" + klk + "  style=' animation-name: entrada;animation-duration: 2s;'><div class='card' ><div class='card-image'><img src='" + imagen + "' style='height:230px ;width:100%;'> <span class='card-title' style='background-color: rgba(0, 0, 0, 0.295);font-size:16px;' >" + nombre + "</span></div><div class='card-action'><a onclick='abrirlink(this);' href='#' id='" + klk + "l'>Abrir en youtube</a>  <a onclick='reproducir(this);' href='#' id='" + klk + "r'>Reproducir</a></div></div></div>";
+                  }
+                  else {
 
 
-}
-adicionarvideo("/.gr3cache/downloaded.gr3d2");
-//document.body.style="";
- document.body.innerHTML+=" <audio controls autoplay preload='auto' class='reproductor' id='reproductor' style='z-index:5000; position: fixed;top: 90% ;   display: flex;opacity: 1 ; width:100%;height: 10%;'/>";
-//division.cl
-document.getElementById("progress").remove();
-document.getElementById("boton").style.display="initial";
+
+                    document.getElementById("tumama").innerHTML += "<div class='col s12 m12 l6 xl3 carta'id=" + klk + " onclick='reproducir(this)' style=' animation-name: entrada;animation-duration: 2s;'><ul class='collection'> <li class='collection-item avatar' style='padding-top:20px;'><img src='" + imagen + "' alt='' class='circle' ><div class='title' style='margin-top:10px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'>" + nombre + "</div><a href='#!' class='secondary-content'><i class='material-icons'>play</i></a><li><ul></div>";
+
+                  }
 
 
-//document.getElementById("progress2").remove();
- 
-        
+                }
+                else {
 
+                  nombreses.splice(klk, 1);
+                  linkeses.splice(klk, 1);
+                  archivitos.splice(klk, 1);
+                  imaginacion.splice(klk, 1);
+                  totalmusic--;
+                }
+
+
+                //document.getElementById("progress2").style.height=String((klk/text.split("¤").length)*100)+"%";
+
+                //
+
+              }
 
 
             }
+          } catch (err) {
+
+
+          }
+          //document.body.style="";
+          document.body.innerHTML += " <audio controls autoplay preload='auto' class='reproductor' id='reproductor' style='z-index:5000; position: fixed;top: 90% ;   display: flex;opacity: 1 ; width:100%;height: 10%;'/>";
+          //division.cl
+          document.getElementById("progress").remove();
+          document.getElementById("boton").style.display = "initial";
+          adicionarvideo("/.gr3cache/downloaded.gr3d2");
+
+          //document.getElementById("progress2").remove();
+
+
+
+
+
         }
+      }
     }
     rawFile.send(null);
-}
-var encargar=function(){
+  }
+  var encargar = function () {
 
 
 
     var reqo = new XMLHttpRequest();
-    reqo.open('GET', "/&&querry&&meconecte",true);
-   reqo.send();
+    reqo.open('GET', "/&&querry&&meconecte", true);
+    reqo.send();
     readTextFile("/.gr3cache/downloaded.gr3d");
 
-}
+  }
 
 
 
 
 
 
-//document.getElementById("progress2").remove();
- 
-        
-
-
-
-   
-
-
-function abrirlink(contexto){
-var localization=contexto.id.replace('l','');
-window.open(linkeses[parseInt(localization)]);
-setTimeout(function(){ document.getElementById('reproductor').pause(); }, 3000);
-
-}
+  //document.getElementById("progress2").remove();
 
 
 
 
 
-window.onload=encargar;
 
-window.onbeforeunload = function(event) {
-  var reqoo = new XMLHttpRequest();
-    reqoo.open('GET', "/&&querry&&medesconecte",true);
-   reqoo.send();
+
+
+  function abrirlink(contexto) {
+    var localization = contexto.id.replace('l', '');
+    window.open(linkeses[parseInt(localization)]);
+    setTimeout(function () { document.getElementById('reproductor').pause(); }, 3000);
+
+  }
+
+
+
+
+
+  window.onload = encargar;
+
+  window.onbeforeunload = function (event) {
+    var reqoo = new XMLHttpRequest();
+    reqoo.open('GET', "/&&querry&&medesconecte", true);
+    reqoo.send();
     event.returnValue = true;
-};
+  };
 
- 
+
 
 
 </script>
-
