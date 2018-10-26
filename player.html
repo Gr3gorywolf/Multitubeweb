@@ -1,0 +1,208 @@
+<!doctype <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Compiled and minified JavaScript -->
+
+</head>
+
+<body>
+
+  <audio src="http://10.0.0.8:12345/storage/2BBE-1D16/YTDownloads/Disturbed-Ten%20Thousand%20Fist.mp3" id="audiotag" autoplay></audio>
+  <div class="barra"> </div>
+  <progress class="progreso red" id="bar" value="100" max="100"></progress>
+  <div class="material-player white ">
+    <img src="http://10.0.0.8:12345/.gr3cache/portraits/ZVinwOpllQk" class="playingphoto ">
+    <div class="titlecontainer">
+      <h6 class="black-text titulo">Bebe Rexha - I Got You (Emdi & Coorby Remix)</h6>
+      <h6 class="lightgray-text titulo2" id="time">25:0:0/1:0:0</h6>
+    </div>
+
+    <i class="material-icons boton black-text" clickable style="margin-top: 13px ;position: fixed;right:68px;">skip_previous</i>
+    <i class="material-icons boton black-text"  href="#" id="playpause" onclick="playpause()" style="margin-top: 13px ;position: fixed;right:38px;">play_arrow</i>
+    <i class="material-icons boton black-text"  href="#" style="margin-top: 13px ;position: fixed;right:10px;">skip_next</i>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
+
+<style>
+  progress[value] {
+    -webkit-appearance: none;
+    appearance: none;
+
+    color: red;
+    height: 7px;
+    width: 100%;
+  }
+
+  progress[value]::-webkit-progress-bar {
+
+
+    border: 1px solid lighten(#acacac, 20%);
+    color: red;
+  }
+
+  progress::-webkit-progress-value {
+    background-color: red;
+  }
+
+  .playingphoto {
+    height: 35px;
+    width: 35px;
+    margin: 7px;
+
+  }
+
+  .boton {
+    cursor: pointer;
+    font-size: 27px;
+  }
+  .titlecontainer{
+    width:calc(100% - 145px);
+  }
+  .titulo {
+
+    margin-top: 10px;
+    margin-left: 0px;
+ 
+   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  }
+
+  .titulo2 {
+
+    margin-top: -3px;
+  
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .botones {
+
+    margin-top: 7px;
+  }
+  .barra {
+    height: 7px;
+    width: 100%;
+    position: fixed;
+    bottom: 50px;
+    background-color: gray;
+  }
+
+  .progreso {
+    position: fixed;
+    bottom: 50px;
+    height: 7px;
+    width: 40%;
+    z-index: 99;
+  }
+
+  .material-player {
+    position: fixed;
+    bottom: 0px;
+    height: 50px;
+    width: 100%;
+    display: inline-flex;
+
+  }
+</style>
+
+
+
+<script>
+ 
+  var timeh = document.getElementById("time");
+  var audio = document.getElementById("audiotag");
+  var playpausebutton = document.getElementById("playpause")
+  var barra = document.getElementById("bar")
+  var barra2 = document.getElementById("bar2")
+
+  setInterval(function () {
+    if (!audio.paused) {
+      var completition = (audio.currentTime / audio.duration) * 0.1
+
+      barra.value = `${completition * 1000}`
+      var timecurrent = calculateTotalValue(audio.currentTime);
+      var duration = calculateTotalValue(audio.duration);
+
+      timeh.innerText = `${timecurrent}/${duration}`
+      console.log(completition * 1000);
+
+      if (audio.paused && playpausebutton.innerText != "play_arrow") {
+
+      } else
+      if (!audio.paused && playpausebutton.innerText != "pause") {
+          playpausebutton.innerText = "pause"
+      }
+
+    }
+
+  }, 500)
+
+  function calculateTotalValue(length) {
+    var minutes = Math.floor(length / 60),
+      seconds_int = length - minutes * 60,
+      seconds_str = seconds_int.toString(),
+      seconds = seconds_str.substr(0, 2)
+    var hours = 0;
+    hours = Math.floor(minutes / 60)
+    var hourstr = (hours < 10 ? "0" + hours : hours)
+    var minstr = (minutes < 10 && hours != 0 ? "0" + minutes : minutes);
+    var segstr = (seconds_int < 10 ? "0" + seconds : seconds);
+    var time = "";
+    if (hours < 1) {
+      time = minstr + ":" + segstr
+
+    }
+    else {
+      time = hourstr + minstr + ":" + segstr
+    }
+
+
+    return time.replace(".", "");
+  }
+
+  function playpause() {
+    if (audio.paused) {
+      playpausebutton.innerText = "pause"
+      audio.play();
+    } else {
+      playpausebutton.innerText = "play_arrow"
+      audio.pause();
+    }
+
+  }
+
+  barra.addEventListener("click", seek);
+  function seek(event) {
+    var percent = event.offsetX / this.offsetWidth;
+    audio.currentTime = percent * audio.duration;
+    barra.value = percent / 100;   
+  }
+
+
+
+</script>
