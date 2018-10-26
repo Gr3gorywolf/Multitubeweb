@@ -35,7 +35,7 @@
     </div>
   </div>
 
-  <div class='scrollcampo' id='scroll' style="z-index:2500;position:fixed;botton:0px;left: 0px;right: 0px;top: 0px;height: calc(100% - 175px);width:100% ;margin-top: 115px; overflow: auto;">
+  <div class='scrollcampo' id='scroll' style="z-index:2500;position:fixed;botton:0px;left: 0px;right: 0px;top: 0px;height: calc(100% - 180px);width:100% ;margin-top: 115px; overflow: auto;">
 
 
   </div>
@@ -43,7 +43,7 @@
     <div class="barra"> </div>
     <progress class="progreso red prg " id="bar" value="0" max="100"></progress>
    
-      <img src="" class="playingphoto " id="imgcancion">
+      <img  class="playingphoto " id="imgcancion">
       <div class="titlecontainer">
         <h6 class="black-text titulo" id="titulocancion"></h6>
         <h6 class="lightgray-text titulo2" id="time"></h6>
@@ -123,8 +123,7 @@
   var tipo = "musica";
   var textofiltro = "";
   var musica = true;
-  var title=document.getElementById("titulocancion");
-  var imagencancion=document.getElementById("imagencancion");
+
 
 
 
@@ -362,8 +361,6 @@ if(document.getElementById(klkrudo)!=null){
     document.getElementById('pillinn').innerText = "Multitube web ►" + nombreses[numerito].toString();
     if (archivitos[numerito].endsWith(".mp3")) {
 
-  title=nombreses[numerito];
-  imagencancion.src=imaginacion[numerito];
 
 
 
@@ -371,27 +368,10 @@ if(document.getElementById(klkrudo)!=null){
 
 
 
-     
-      /*
-      req.onload = function() {
-         // Onload is triggered even on 404
-         // so we need to check the status code
-         if (this.status === 200) {
-            var videoBlob = this.response;
-            var vid = URL.createObjectURL(videoBlob); // IE10+
-            // Video is now downloaded
-            // and we can set it as source on the video element
-            document.getElementById("reproductor").src = vid;
-            document.getElementById("reproductor").load();
-      document.getElementById("reproductor").play();
-         }
-      }
-      req.onerror = function() {
-         // Error
-      }
-      
-      req.send();
-      */
+ 
+       document.getElementById("titulocancion").innerText=nombreses[numerito];
+       document.getElementById("imgcancion").src=imaginacion[numerito];
+   
 
       document.getElementById("reproductor").src = archivitos[numerito];
 
