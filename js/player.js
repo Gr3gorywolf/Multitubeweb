@@ -9,7 +9,7 @@ function initplayer(){
     playpausebutton = document.getElementById("playpause")
      barra = document.getElementById("bar")
      barra2 = document.getElementById("bar2")
-
+     barra.addEventListener("click", seek);
      setInterval(function () {
         if (!audio.paused) {
           var completition = (audio.currentTime / audio.duration) * 0.1
@@ -70,7 +70,7 @@ function initplayer(){
 
   }
 
-  barra.addEventListener("click", seek);
+ 
   function seek(event) {
      
     var percent = event.offsetX / this.offsetWidth;
