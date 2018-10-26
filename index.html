@@ -35,7 +35,7 @@
     </div>
   </div>
 
-  <div class='scrollcampo' id='scroll' style="z-index:2500;position:fixed;botton:0px;left: 0px;right: 0px;top: 0px;height: calc(94% - 115px);width:100% ;margin-top: 115px; overflow: auto;">
+  <div class='scrollcampo' id='scroll' style="z-index:2500;position:fixed;botton:0px;left: 0px;right: 0px;top: 0px;height: calc(100% - 175px);width:100% ;margin-top: 115px; overflow: auto;">
 
 
   </div>
@@ -43,7 +43,7 @@
     <div class="barra"> </div>
     <progress class="progreso red prg " id="bar" value="0" max="100"></progress>
    
-      <img src="http://10.0.0.8:12345/.gr3cache/portraits/ZVinwOpllQk" class="playingphoto " id="imgcancion">
+      <img src="" class="playingphoto " id="imgcancion">
       <div class="titlecontainer">
         <h6 class="black-text titulo" id="titulocancion"></h6>
         <h6 class="lightgray-text titulo2" id="time"></h6>
@@ -66,10 +66,10 @@
 
 
 </footer>
-<script src='/.gr3cache/js/player.js'></script>
+
 <script src='/.gr3cache/js/materialize.min.js'></script>
 <script src='/.gr3cache/js/color-thief.js'></script>
-
+<script src='/.gr3cache/js/player.js'></script>
 </html>
 
 <style>
@@ -474,6 +474,8 @@ try{
 
 
  async function adicionarvideo(file) {
+
+ 
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, false);
     rawFile.onreadystatechange = function () {
@@ -553,7 +555,7 @@ try{
     lastof = 0;
     musica = true;
     filtrar();
-
+ 
   }
 
   function ponervideo() {
@@ -643,11 +645,11 @@ try{
           document.body.innerHTML += " <audio  autoplay preload='auto' class='reproductor' id='reproductor' style='z-index:5000; position: fixed;top: 90% ;   display: flex;opacity: 1 ; width:100%;height: 10%;'/>";
           //division.cl
           document.getElementById("progress").remove();
-         
+         initplayer();
           adicionarvideo("/.gr3cache/downloaded.gr3d2");
 
           //document.getElementById("progress2").remove();
-
+        
 
 
 

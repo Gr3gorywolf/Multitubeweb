@@ -1,30 +1,40 @@
-var timeh = document.getElementById("time");
-  var audio = document.getElementById("reproductor");
-  var playpausebutton = document.getElementById("playpause")
-  var barra = document.getElementById("bar")
-  var barra2 = document.getElementById("bar2")
+var timeh = null
+  var audio = null
+  var playpausebutton = null
+  var barra =null
+  var barra2 = null
+function initplayer(){
+    timeh = document.getElementById("time");
+   audio = document.getElementById("reproductor");
+    playpausebutton = document.getElementById("playpause")
+     barra = document.getElementById("bar")
+     barra2 = document.getElementById("bar2")
 
-  setInterval(function () {
-    if (!audio.paused) {
-      var completition = (audio.currentTime / audio.duration) * 0.1
+     setInterval(function () {
+        if (!audio.paused) {
+          var completition = (audio.currentTime / audio.duration) * 0.1
+    
+          barra.value = `${completition * 1000}`
+          var timecurrent = calculateTotalValue(audio.currentTime);
+          var duration = calculateTotalValue(audio.duration);
+    
+          timeh.innerText = `${timecurrent}/${duration}`
+          console.log(completition * 1000);
+    
+          if (audio.paused && playpausebutton.innerText != "play_arrow") {
+    
+          } else
+          if (!audio.paused && playpausebutton.innerText != "pause") {
+              playpausebutton.innerText = "pause"
+          }
+    
+        }
+    
+      }, 500)
 
-      barra.value = `${completition * 1000}`
-      var timecurrent = calculateTotalValue(audio.currentTime);
-      var duration = calculateTotalValue(audio.duration);
 
-      timeh.innerText = `${timecurrent}/${duration}`
-      console.log(completition * 1000);
-
-      if (audio.paused && playpausebutton.innerText != "play_arrow") {
-
-      } else
-      if (!audio.paused && playpausebutton.innerText != "pause") {
-          playpausebutton.innerText = "pause"
-      }
-
-    }
-
-  }, 500)
+}
+ 
 
   function calculateTotalValue(length) {
     var minutes = Math.floor(length / 60),
