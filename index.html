@@ -304,10 +304,8 @@ if(document.getElementById(klkrudo)!=null){
 
 
     document.getElementById("reproductorvideo").src = archivitos[numerito];
-    document.getElementById("reproductorvideo").load();
-    document.getElementById("reproductorvideo").play();
     lastof = numerito;
-    document.getElementById("reproductor").src = "";
+    document.getElementById("reproductor").pause();
     document.getElementById("reproductorvideo").onended = function () {
       quitarvideo();
       //  lastof++;
