@@ -4,7 +4,7 @@
     appearance: none;
 
     color: red;
-    height: 7px;
+    height: 10px;
     width: 100%;
   }
 
@@ -57,7 +57,7 @@
     margin-top: 7px;
   }
   .barra {
-    height: 7px;
+    height: 10px;
     width: 100%;
     position: fixed;
     bottom: 50px;
@@ -67,7 +67,7 @@
   .progreso {
     position: fixed;
     bottom: 50px;
-    height: 7px;
+    height: 10px;
     width: 40%;
     z-index: 99;
   }
