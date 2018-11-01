@@ -23,15 +23,17 @@
     height: 35px;
     width: 35px;
     margin: 7px;
-
+    z-index: 99;
   }
 
   .boton {
     cursor: pointer;
     font-size: 27px;
+    z-index: 99;
   }
   .titlecontainer{
     width:calc(100% - 145px);
+    z-index: 99;
   }
   .titulo {
     font-size: 14px;
@@ -41,7 +43,7 @@
    white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  
+  z-index: 99;
   }
 
   .titulo2 {
@@ -51,10 +53,12 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    z-index: 99;
   }
   .botones {
 
     margin-top: 7px;
+    z-index: 99;
   }
   .barra {
     height: 7px;
@@ -62,14 +66,17 @@
     position: fixed;
     bottom: 50px;
     background-color: gray;
+
   }
 
   .progreso {
     position: fixed;
-    bottom: 50px;
-    height: 7px;
-    width: 40%;
+    bottom: 0px;
+    height: 50px;
+    width: calc(100% - 145px);
     z-index: 99;
+    background-color: red;
+    opacity: 0.5;
   }
 
   .material-player {
@@ -77,6 +84,7 @@
     bottom: 0px;
     height: 50px;
     width: 100%;
+    z-index: 99;
     display: inline-flex;
 
   }
