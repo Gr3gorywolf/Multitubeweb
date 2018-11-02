@@ -624,7 +624,7 @@ try{
           //division.cl
           document.getElementById("progress").remove();
          initplayer();
-          adicionarvideo("/.gr3cache/downloaded.gr3d2");
+          adicionarvideo("/.gr3cache/downloaded.gr3d2?version="+getrandom());
 
           //document.getElementById("progress2").remove();
         
@@ -644,7 +644,7 @@ try{
     var reqo = new XMLHttpRequest();
     reqo.open('GET', "/&&querry&&meconecte", true);
     reqo.send();
-    readTextFile("/.gr3cache/downloaded.gr3d");
+    readTextFile("/.gr3cache/downloaded.gr3d?version="+getrandom());
 
   }
 
@@ -669,7 +669,9 @@ try{
 
   }
 
-
+function getrandom(){
+  return Math.random();
+}
 
 
 
