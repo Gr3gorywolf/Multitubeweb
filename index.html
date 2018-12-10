@@ -464,6 +464,7 @@ try{
 
 
             var text = String(rawFile.response);
+            if(text!="none"){
             text = text.substring(0, text.length - 1);
                  var nodo=text.split("¤").sort();
                  var innerht2="";
@@ -513,9 +514,11 @@ try{
 
               }
           
-         
+            }
             }
             document.getElementById("tumama").innerHTML+=innerht2;
+
+            
         }
       }
     }
