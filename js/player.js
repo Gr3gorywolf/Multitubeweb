@@ -4,6 +4,7 @@ var timeh = null
   var barra =null
   var barra2 = null
 function initplayer(){
+    console.log("me inicialize");
     timeh = document.getElementById("time");
    audio = document.getElementById("reproductor");
     playpausebutton = document.getElementById("playpause")

@@ -13,60 +13,32 @@
 <link href="/.gr3cache/css/icon.css" rel="stylesheet">
 <link rel='stylesheet' href="/.gr3cache/css/materialize.min.css">
 <link rel='stylesheet' href="/.gr3cache/css/player.css">
-<header id="cabeza" style="z-index:5000; position: fixed;width:100%;height: 20px;bottom:0px;top:0px;  -webkit-backface-visibility: hidden; ">
 
 
-</header>
-
+ 
 <body style="margin-top: 65px;">
+  <div id="app">
 
-  <img id='hiddenforever' style="display:none;">
-  <div class="preloader-wrapper big active" id="progress" style="position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;z-index:9999999 ;">
-    <div class="spinner-layer spinner-red-only">
-      <div class="circle-clipper left">
-        <div class="circle"></div>
-      </div>
-      <div class="gap-patch">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-clipper right">
-        <div class="circle"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class='scrollcampo' id='scroll' style="z-index:2500;position:fixed;botton:0px;left: 0px;right: 0px;top: 0px;height: calc(100% - 177px);width:100% ;margin-top: 115px; overflow: auto;">
-
-
-  </div>
-  <div class="material-player white ">
-    <div class="barra"> </div>
-    <progress class="progreso red prg " id="bar" value="0" max="100"></progress>
+    <nav-bar></nav-bar>
+    <library></library>
+    <!--<preloader></preloader>-->
+    <player></player>
    
-      <img  class="playingphoto " id="imgcancion">
-      <div class="titlecontainer">
-        <h6 class="black-text titulo" id="titulocancion"></h6>
-        <h6 class="lightgray-text titulo2" id="time"></h6>
-      </div>
+  </div>
+ 
+  <img id='hiddenforever' style="display:none;">
+ 
+
   
-      <i class="material-icons boton black-text" clickable style="margin-top: 13px ;position: fixed;right:68px;" onclick="reproducir(lastof - 1);">skip_previous</i>
-      <i class="material-icons boton black-text"  href="#" id="playpause" onclick="playpause()" style="margin-top: 13px ;position: fixed;right:38px;">play_arrow</i>
-      <i class="material-icons boton black-text"  href="#" style="margin-top: 13px ;position: fixed;right:10px;" onclick="reproducir(lastof + 1);">skip_next</i>
-    </div>
+ 
   
 
 
 </body>
 
-
-
-
-
-<footer>
-
-
-</footer>
-
+<script src='/.gr3cache/js/vue.js'></script>
+<script src='/.gr3cache/js/httpVueLoader.js'></script>
+<script src='/.gr3cache/js/axios.js'></script>
 <script src='/.gr3cache/js/materialize.min.js'></script>
 <script src='/.gr3cache/js/color-thief.js'></script>
 <script src='/.gr3cache/js/player.js'></script>
@@ -111,6 +83,62 @@
     }
   }
 </style>
+
+<script>
+
+
+ var store = {
+       state:{
+         music:[],
+         videos:[],
+         selectedType: "mp3",
+         playingElement: null
+       },
+       playNext(){
+        let currentIndex = -1;
+        let elements = [];
+         if(this.state.selectedType == "mp3"){
+           elements = this.state.music;
+         }else{
+          elements = this.state.videos;
+         }
+         currentIndex =  elements.findIndex(ax=>ax.link == this.state.playingElement.link);
+         if(currentIndex >= 0){
+          this.state.playingElement = this.state.music[currentIndex+1];
+         }
+          
+        
+       },
+       playPrevious(){
+        let currentIndex = -1;
+        let elements = [];
+         if(this.state.selectedType == "mp3"){
+           elements = this.state.music;
+         }else{
+          elements = this.state.videos;
+         }
+         currentIndex =  elements.findIndex(ax=>ax.link == this.state.playingElement.link);
+         if(currentIndex > 0){
+          this.state.playingElement = this.state.music[currentIndex-1];
+         }
+       }
+       ,
+       play(){
+          
+       }
+
+ }
+
+  new Vue({
+        el: '#app',
+        components: {
+          'player': httpVueLoader('/.gr3cache/components/Player.vue'),
+          'nav-bar': httpVueLoader('/.gr3cache/components/NavBar.vue'),
+          'preloader': httpVueLoader('/.gr3cache/components/Preloader.vue'),
+          'library':httpVueLoader('/.gr3cache/components/Library.vue')
+        }
+      });
+</script>
 
 <script>
   document.body.style.overflow = "hidden";
@@ -270,37 +298,6 @@ if(document.getElementById(klkrudo)!=null){
     //}
     document.getElementById("search").disabled = true;
     document.getElementById("search").value = nombreses[numerito];
-    //document.body.innerHTML+="<div id='shadow' style='background-color: rgba(0, 0, 0, 0.895);height:100%;width:100%;z-index:5000; position: fixed;bottom:0px;top:0px;'onclick='quitarvideo();' ></div>"
-
-
-
-
-
-
-
-
-    //document.body.innerHTML+= "<div class='preloader-wrapper big active' id='progress' style='position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;z-index:9999999 ;' ><div class='spinner-layer spinner-red-only'><div class='circle-clipper left'> <div class='circle'></div></div><div class='gap-patch'> <div class='circle'></div> </div><div class='circle-clipper right'> <div class='circle'></div> </div> </div></div>";
-    /*req.onload = function() {
-       // Onload is triggered even on 404
-       // so we need to check the status code
-       if (this.status === 200) {
-          var videoBlob = this.response;
-          var vid = URL.createObjectURL(videoBlob); // IE10+
-          // Video is now downloaded
-          // and we can set it as source on the video element
-          document.getElementById("reproductorvideo").src = vid;
-          document.getElementById("reproductorvideo").load();
-    document.getElementById("reproductorvideo").play();
-    //document.getElementById("progress").remove();
-       }
-    }
-    req.onerror = function() {
-       // Error
-      // document.getElementById("progress").remove();
-    }
-    
-    req.send();
-    */
 
 
     document.getElementById("reproductorvideo").src = archivitos[numerito];
@@ -451,87 +448,11 @@ try{
 
 
 
- async function adicionarvideo(file) {
+   /* rawFile.send(null);
+      filtrar();
+    
+*/
 
- 
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function () {
-      if (rawFile.readyState === 4) {
-        if (rawFile.status === 200 || rawFile.status == 0) {
-
-        
-
-
-            var text = String(rawFile.response);
-           
-            if(text!="none"){
-              text = text.substring(0, text.length - 1);
-                 var nodo=text.split("¤").sort();
-                 var innerht2="";
-                 var esmobille2=isMobileDevice();
-            for (var klk in nodo) {
-                    var nodo2=nodo[klk].split("²");
-              /*console.log("paso");
-            console.log(klk);
-            console.log(text.split("¤")[klk]);*/
-              // console.log(text.split("¤")[klk]);
-             
-              if (nodo2[0] != null) {
-
-                var nombre = nodo2[0];
-                var link = nodo2[1];
-                var archivo = nodo2[2];
-
-
-                nombreses.push(nombre);
-                linkeses.push(link);
-                archivitos.push(archivo);
-                console.log(archivo);
-                var imagen = "/.gr3cache/portraits/" + link.split("=")[1];
-                imaginacion.push(imagen);
-                var indice = totalmusic + parseInt(klk);
-               
-                  if (!esmobille2) {
-
-
-
-                    innerht2 += "<div class='col s12 m6 l4 xl3 carta'id=" + indice + " ><div class='card hoverable' ><div class='card-image'><img src='" + imagen + "' style='height:230px ;width:100%;'> <span class='card-title' style='background-color: rgba(0, 0, 0, 0.295);font-size:16px;' >" + nombre + "</span></div><div class='card-action'><a onclick='abrirlink(this);' href='#' id='" + indice + "l'>Abrir en youtube</a> <a onclick='reproducir(this);' href='#' id='" + indice + "r'>Reproducir</a></div></div></div>";
-                  }
-                  else {
-
-
-
-                   innerht2+= "<div class='col s12 m12 l6 xl3 carta'id=" + indice + " onclick='reproducir(this)' ><ul class='collection hoverable'> <li class='collection-item avatar' style='padding-top:20px;'><img src='" + imagen + "' alt='' class='circle'><div class='title' style='margin-top:10px;text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'>" + nombre + "</div><a href='#!' class='secondary-content'><i class='material-icons'>play</i></a><li><ul></div>";
-
-                  }
-           
-
-
-
-                //document.getElementById("progress2").style.height=String((klk/text.split("¤").length)*100)+"%";
-
-                //
-
-              }
-          
-            }
-            }
-            document.getElementById("tumama").innerHTML+=innerht2;
-
-            
-        }
-      }
-    }
-
-
-
-    rawFile.send(null);
-    filtrar();
-
-
-
-  }
 
   function ponermusica() {
     lastof = 0;
@@ -547,101 +468,6 @@ try{
 
   }
 
-
-
-  async function readTextFile(file) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function () {
-      if (rawFile.readyState === 4) {
-        if (rawFile.status === 200 || rawFile.status == 0) {
-          var text = String(rawFile.response);
-
-         
-          if(text!="none"){
-            text = text.substring(0, text.length - 1);
-          document.getElementById("cabeza").innerHTML += "<nav class='nav-extended' ><div class='nav-wrapper red' ><div class='input-field'><input id='search' type='search' autocomplete='off'   oninput='filtrar()' style='height: 54px;'><label class='label-icon' for='search'><i class='material-icons' id='lupita' onclick='quitarvideo();'style='cursor:default; href='#'>search</i></label></div></div> <div class='nav-content'><ul class='tabs red'><li class='tab'><a onclick='ponermusica()' style='color:white;' href='#test1'>Musica</a></li><li class='tab' onclick='ponervideo()'><a  class='active' style='color:white;' href='#test2'>Videos</a></li></ul></div>    </nav>"
-
-          document.getElementById("scroll").innerHTML += "<div class='row' id='tumama'  >";
-          document.getElementById("scroll").innerHTML += "</div>"
-        var innerht="";
-         var nodo=text.split("¤").sort();
-         var esmobille=isMobileDevice();
-        
-            for (var klk in nodo) {
-                     var nodo2=nodo[klk].split("²");
-              /*console.log("paso");
-            console.log(klk);
-            console.log(text.split("¤")[klk]);*/
-              // console.log(text.split("¤")[klk]);
-              try {
-              if (nodo2[0] != null && text.trim()!='') {
-                
-                var nombre = nodo2[0];
-                var link =  nodo2[1];
-                var archivo =  nodo2[2];
-
-
-                nombreses.push(nombre);
-                linkeses.push(link);
-                archivitos.push(archivo);
-                console.log(archivo);
-              var imagen = "/.gr3cache/portraits/" + link.split("=")[1];
-           
-                imaginacion.push(imagen);
-                totalmusic++;
-                // document.getElementById("tumama").innerHTML+="<div class='col s12 m6 l4 xl3 'id="+klk+" onclick='reproducir(this)' style=' animation-name: entrada;animation-duration: 2s;'><div class='card' ><div class='card-image'><img src='"+imagen+"' style='height:230px ;width:100%;'> <span class='card-title' style='background-color: rgba(0, 0, 0, 0.295);font-size:20px;' >"+nombre+"</span></div><div class='card-action'><a href='"+link+"'>Abrir en youtube</a></div></div></div>";
-            
-                  if (!esmobille) {
-
-
-
-                    innerht += "<div class='col s12 m6 l4 xl3 carta'id=" + klk + "  ><div class='card hoverable' ><div class='card-image'><img src='" + imagen + "' style='height:230px ;width:100%;'> <span class='card-title' style='background-color: rgba(0, 0, 0, 0.295);font-size:16px;' >" + nombre + "</span></div><div class='card-action'><a onclick='abrirlink(this);' href='#' id='" + klk + "l'>Abrir en youtube</a>  <a onclick='reproducir(this);' href='#' id='" + klk + "r'>Reproducir</a></div></div></div>";
-                  }
-                  else {
-
-
-
-                   innerht += "<div class='col s12 m12 l6 xl3 carta'id=" + klk + " onclick='reproducir(this)' ><ul class='collection hoverable'> <li class='collection-item avatar' style='padding-top:20px;'><img src='" + imagen + "' alt='' class='circle' ><div class='title' style='margin-top:10px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'>" + nombre + "</div><a href='#!' class='secondary-content'><i class='material-icons'>play</i></a><li><ul></div>";
-
-                  }
-
-
-              
-
-
-                //document.getElementById("progress2").style.height=String((klk/text.split("¤").length)*100)+"%";
-
-                //
-
-              }
-            } catch (err) {
-
-
-}
-
-            }
-          }
-          //document.body.style="";
-          document.getElementById("tumama").innerHTML=innerht;
-
-          document.body.innerHTML += " <audio  autoplay preload='auto' class='reproductor' id='reproductor' style='z-index:5000; position: fixed;top: 90% ;   display: flex;opacity: 1 ; width:100%;height: 10%;'/>";
-          //division.cl
-          document.getElementById("progress").remove();
-         initplayer();
-          adicionarvideo("/.gr3cache/downloaded.gr3d2?version="+getrandom());
-
-          //document.getElementById("progress2").remove();
-        
-
-
-
-
-        }
-      }
-    }
-    rawFile.send(null);
-  }
   var encargar = function () {
 
 
@@ -649,29 +475,12 @@ try{
     var reqo = new XMLHttpRequest();
     reqo.open('GET', "/&&querry&&meconecte", true);
     reqo.send();
-    readTextFile("/.gr3cache/downloaded.gr3d?version="+getrandom());
 
   }
-
-
-
-
-
-
-  //document.getElementById("progress2").remove();
-
-
-
-
-
-
-
-
   function abrirlink(contexto) {
     var localization = contexto.id.replace('l', '');
     window.open(linkeses[parseInt(localization)]);
     setTimeout(function () { document.getElementById('reproductor').pause(); }, 500);
-
   }
 
 function getrandom(){
