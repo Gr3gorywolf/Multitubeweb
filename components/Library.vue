@@ -1,8 +1,10 @@
 <template>
   <div>
+   
     <div class="scrollcampo row" id="scroll">
       <div v-for="mus in shared.music" v-if="shared.selectedType == 'mp3'">
         <media-card :library="mus"></media-card>
+         <h5>i love uuuuuuuu!!</h5>
       </div>
       <div v-for="vid in shared.videos" v-if="shared.selectedType == 'mp4'">
         <media-card :library="vid"></media-card>

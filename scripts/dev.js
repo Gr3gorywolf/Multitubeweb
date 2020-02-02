@@ -28,11 +28,13 @@ function isFileCompilable(fileName) {
 function start(recompiling = false) {
 
 
+
+    if(!recompiling){
     console.log("Injecting test data...");
     rimraf(basePath+"dev");
     copyFolderSync(basePath+"testdata",basePath+"dev");
     console.log("Moving files to dev folder...");
-   
+     }
     for (let directory of config.directories) {
         recursive(`${basePath}${directory}`).then((files) => {
             for (let file of files) {
