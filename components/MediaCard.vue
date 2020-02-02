@@ -10,7 +10,7 @@
           >{{ library.name }}</span>
         </div>
         <div class="card-action">
-          <a href="#">Abrir en youtube</a>
+          <a href="#">Abrir en youtube</a> 
           <a href="#" @click="playElement(library)">Reproducir</a>
         </div>
       </div>
@@ -47,7 +47,7 @@ module.exports = {
   mounted() {},
   methods: {
     isMobileDevice() {
-      return (
+      return (  
         typeof window.orientation !== "undefined" ||
         navigator.userAgent.indexOf("IEMobile") !== -1
       );

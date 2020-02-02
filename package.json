@@ -1,0 +1,37 @@
+{
+  "name": "multitubeweb",
+  "version": "1.0.0",
+  "description": "A multitube streaming server frontend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node scripts/dev.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gr3gorywolf/Multitubeweb.git"
+  },
+  "author": "GR3",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gr3gorywolf/Multitubeweb/issues"
+  },
+  "homepage": "https://github.com/Gr3gorywolf/Multitubeweb#readme",
+  "directories": [
+    "js/",
+    "imgs/",
+    "components/",
+    "css/"
+  ],
+  "files": [
+    "index.html",
+    "lista.png",
+    "playcircle.png"
+  ],
+  "dependencies": {
+    "filewatcher": "^3.0.1",
+    "fs": "0.0.1-security",
+    "live-server": "^1.2.1",
+    "path": "^0.12.7",
+    "recursive-readdir": "^2.2.2"
+  }
+}

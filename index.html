@@ -7,12 +7,12 @@
   <title id='pillinn'>Multitube web</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-  <link rel="icon" href="/.gr3cache/imgs/icon.png">
+  <link rel="icon" href="--rootpath--/imgs/icon.png">
 </head>
 
-<link href="/.gr3cache/css/icon.css" rel="stylesheet">
-<link rel='stylesheet' href="/.gr3cache/css/materialize.min.css">
-<link rel='stylesheet' href="/.gr3cache/css/player.css">
+<link href="--rootpath--/css/icon.css" rel="stylesheet">
+<link rel='stylesheet' href="--rootpath--/css/materialize.min.css">
+<link rel='stylesheet' href="--rootpath--/css/player.css">
 
 
  
@@ -36,12 +36,12 @@
 
 </body>
 
-<script src='/.gr3cache/js/vue.js'></script>
-<script src='/.gr3cache/js/httpVueLoader.js'></script>
-<script src='/.gr3cache/js/axios.js'></script>
-<script src='/.gr3cache/js/materialize.min.js'></script>
-<script src='/.gr3cache/js/color-thief.js'></script>
-<script src='/.gr3cache/js/player.js'></script>
+<script src='--rootpath--/js/vue.js'></script>
+<script src='--rootpath--/js/httpVueLoader.js'></script>
+<script src='--rootpath--/js/axios.js'></script>
+<script src='--rootpath--/js/materialize.min.js'></script>
+<script src='--rootpath--/js/color-thief.js'></script>
+<script src='--rootpath--/js/player.js'></script>
 </html>
 
 <style>
@@ -132,10 +132,10 @@
   new Vue({
         el: '#app',
         components: {
-          'player': httpVueLoader('/.gr3cache/components/Player.vue'),
-          'nav-bar': httpVueLoader('/.gr3cache/components/NavBar.vue'),
-          'preloader': httpVueLoader('/.gr3cache/components/Preloader.vue'),
-          'library':httpVueLoader('/.gr3cache/components/Library.vue')
+          'player': httpVueLoader('--rootpath--/components/Player.vue'),
+          'nav-bar': httpVueLoader('--rootpath--/components/NavBar.vue'),
+          'preloader': httpVueLoader('--rootpath--/components/Preloader.vue'),
+          'library':httpVueLoader('--rootpath--/components/Library.vue')
         }
       });
 </script>

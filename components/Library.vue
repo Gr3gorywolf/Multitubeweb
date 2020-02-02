@@ -15,7 +15,7 @@
 module.exports = {
   name: "library",
   components: {
-    "media-card": httpVueLoader("/.gr3cache/components/MediaCard.vue")
+    "media-card": httpVueLoader("--rootpath--/components/MediaCard.vue")
   },
   data: () => {
     return {
@@ -31,9 +31,9 @@ module.exports = {
     fetchMedia(type) {
       let file = "";
       if (type == "mp3") {
-        file = "/.gr3cache/downloaded.gr3d";
+        file = "--rootpath--/downloaded.gr3d";
       } else {
-        file = "/.gr3cache/downloaded.gr3d2";
+        file = "--rootpath--/downloaded.gr3d2";
       }
 
       axios
@@ -61,7 +61,7 @@ module.exports = {
             var name = individualElements[0];
             var link = individualElements[1];
             var file = individualElements[2];
-            var imageUrl = "/.gr3cache/portraits/" + link.split("=")[1];
+            var imageUrl = "--rootpath--/portraits/" + link.split("=")[1];
             parsedData.push({
               image: imageUrl,
               link: link,
