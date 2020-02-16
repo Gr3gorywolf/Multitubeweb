@@ -60,13 +60,13 @@
     height: 10px;
     width: 100%;
     position: fixed;
-    bottom: 50px;
+    bottom: 120px;
     background-color: gray;
   }
 
   .progreso {
     position: fixed;
-    bottom: 50px;
+    bottom: 120px;
     height: 10px;
     width: 40%;
     z-index: 99;
@@ -74,9 +74,11 @@
 
   .material-player {
     position: fixed;
-    bottom: 0px;
+    bottom: 70px;
     height: 50px;
     width: 100%;
+    margin-top:5px;
+    margin-bottom: 0px;
+    padding-bottom:0px;
     display: inline-flex;
-
   }

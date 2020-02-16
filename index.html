@@ -6,34 +6,27 @@
 <head>
   <title id='pillinn'>Multitube web</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
   <link rel="icon" href="--rootpath--/imgs/icon.png">
 </head>
 
 <link href="--rootpath--/css/icon.css" rel="stylesheet">
 <link rel='stylesheet' href="--rootpath--/css/materialize.min.css">
 <link rel='stylesheet' href="--rootpath--/css/player.css">
+<link rel='stylesheet' href="--rootpath--/css/roboto.css">
+<link rel='stylesheet' href="--rootpath--/css/materialdesignicons.min.css">
 
 
- 
 <body style="margin-top: 65px;">
   <div id="app">
-
     <nav-bar></nav-bar>
-    <library></library>
-    <!--<preloader></preloader>-->
+    <library style="width:100vw;"></library> 
     <player></player>
-   
+    <div style="position: fixed;bottom:0px;z-index:9999;">
+      <bottom-bar style="width:100%;"></bottom-bar>
+    </div>
   </div>
- 
   <img id='hiddenforever' style="display:none;">
- 
-
-  
- 
-  
-
-
 </body>
 
 <script src='--rootpath--/js/vue.js'></script>
@@ -42,6 +35,7 @@
 <script src='--rootpath--/js/materialize.min.js'></script>
 <script src='--rootpath--/js/color-thief.js'></script>
 <script src='--rootpath--/js/player.js'></script>
+
 </html>
 
 <style>
@@ -61,9 +55,11 @@
     from {
       transform: translate(0, 0px);
     }
+
     65% {
       transform: translate(0, 15px);
     }
+
     to {
       transform: translate(0, -0px);
     }
@@ -85,414 +81,110 @@
 </style>
 
 <script>
-
-
- var store = {
-       state:{
-         music:[],
-         videos:[],
-         selectedType: "mp3",
-         playingElement: null
-       },
-       playNext(){
-        let currentIndex = -1;
-        let elements = [];
-         if(this.state.selectedType == "mp3"){
-           elements = this.state.music;
-         }else{
-          elements = this.state.videos;
-         }
-         currentIndex =  elements.findIndex(ax=>ax.link == this.state.playingElement.link);
-         if(currentIndex >= 0){
-          this.state.playingElement = this.state.music[currentIndex+1];
-         }
-          
-        
-       },
-       playPrevious(){
-        let currentIndex = -1;
-        let elements = [];
-         if(this.state.selectedType == "mp3"){
-           elements = this.state.music;
-         }else{
-          elements = this.state.videos;
-         }
-         currentIndex =  elements.findIndex(ax=>ax.link == this.state.playingElement.link);
-         if(currentIndex > 0){
-          this.state.playingElement = this.state.music[currentIndex-1];
-         }
-       }
-       ,
-       play(){
-          
-       }
-
- }
-
-  new Vue({
-        el: '#app',
-        components: {
-          'player': httpVueLoader('--rootpath--/components/Player.vue'),
-          'nav-bar': httpVueLoader('--rootpath--/components/NavBar.vue'),
-          'preloader': httpVueLoader('--rootpath--/components/Preloader.vue'),
-          'library':httpVueLoader('--rootpath--/components/Library.vue')
-        }
-      });
-</script>
-
-<script>
-  document.body.style.overflow = "hidden";
-  var archivitos = new Array();
-  var imaginacion = new Array();
-  var nombreses = new Array();
-  var linkeses = new Array();
-  var lastof = 0;
-  var totalmusic = 0;
-  var tipo = "musica";
-  var textofiltro = "";
-  var musica = true;
-
-
-
-
-  function doesFileExist(urlToFile) {
-    return true;
-  }
-
-
-
-
-  function isMobileDevice() {
-    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-  }
-
-
-  
-
-  function notificar(nombre, link, imagen) {
-    if (Notification.permission !== "granted")
-      Notification.requestPermission();
-    else {
-      var notification = new Notification('Reproduciendo...', {
-        icon: imagen,
-        body: nombre,
-
-      });
-
-
-      notification.onclick = function () {
-        window.open(link);
-      };
-
-    }
-
-  }
-
-
-
-
-  function filtrar() {
-
-    var filtro = document.getElementById("search").value;
-
-
-
-
-    //document.body.innerHTML="";
-    //document.body.innerHTML+="<div class=row id=tumama  >";
-    // document.body.innerHTML+="</div>"
-
-    for (var klk in nombreses) {
-      var klkrudo = String(klk);
-if(document.getElementById(klkrudo)!=null){
-      if (nombreses[klk].toLowerCase().includes(filtro.toLowerCase())  ) {
-        console.log("paseyklk");
-
-
-        if (!isMobileDevice()) {
-          document.getElementById(klkrudo).style.animationName = "entrada";
-          document.getElementById(klkrudo).style.animationDuration = "2s";
-        } else {
-
-          document.getElementById(klkrudo).style.animationName = "";
-          document.getElementById(klkrudo).style.animationDuration = "";
-        }
-
-        if (archivitos[klk].toLowerCase().endsWith('.mp4') && musica == false || archivitos[klk].toLowerCase().endsWith('.mp3') && musica == true) {
-          document.getElementById(klkrudo).style.display = "initial";
-        } else {
-          document.getElementById(klkrudo).style.display = "none";
-        }
-
-
-
-        //document.getElementById("tumama").innerHTML+="<div class='col s12 m6 l4 xl3 '><div class='card' id="+klk+" onclick='reproducir(this)'><div class='card-image'><img src='"+imagen+"' style='height:230px ;width:100%;'> <span class='card-title' style='background-color: rgba(0, 0, 0, 0.295);font-size:20px;' >"+nombre+"</span></div><div class='card-content'><p>"+link+"</p></div><div class='card-action'><a href='"+link+"'>Abrir en youtube</a></div></div></div>";
+  var store = {
+    state: {
+      music: [],
+      videos: [],
+      selectedType: "mp3",
+      filter: "",
+      playingElement: null
+    },
+    playNext() {
+      let currentIndex = -1;
+      let elements = [];
+      if (this.state.selectedType == "mp3") {
+        elements = this.state.music;
       } else {
-        console.log("paseyklk");
-        if (!isMobileDevice()) {
-
-          document.getElementById(klkrudo).style.animationName = "entrada";
-          document.getElementById(klkrudo).style.animationDuration = "2s";
-        } else {
-
-          document.getElementById(klkrudo).style.animationName = "";
-          document.getElementById(klkrudo).style.animationDuration = "";
-        }
-        document.getElementById(klkrudo).style.display = "none"
+        elements = this.state.videos;
       }
-    }
-    }
-    console.log("paseyklk2");
-    //document.body.innerHTML+=" <video controls autoplay class='reproductor' id='reproductor' style='z-index:99999; position: fixed;top: 95% ;   display: flex;opacity: 1 ; width:100%;height: 5%;background: white;'/>"
-    //division.cl
-
-
-
-
-
-
-
-
-
-
-
-
-
-  }
-
-  function quitarvideo() {
-    //document.getElementById("shadow").remove();
-    document.getElementById("lupita").innerText = "search";
-    document.getElementById("reproductorvideo").remove();
-    //document.body.style.overflow = "scroll";
-    document.getElementById("search").disabled = false;
-    document.getElementById("search").value = textofiltro;
-    document.getElementById("search").style = "height:54px;";
-
-  }
-  function reproducirvideo(texto) {
-
-    var numerito = 0;
-    if (texto.id == null) {
-
-
-      numerito = texto;
-
-    } else {
-      numerito = parseInt(texto.id)
-    }
-
-    textofiltro = document.getElementById("search").value;
-    document.getElementById("search").style = "color:white; height:54px;";
-    document.getElementById("lupita").innerText = "arrow_back";
-    document.body.style.overflow = "hidden";
-    /*if(!esmobil){
-    
-    
-    
-    document.body.innerHTML+="<video autoplay  preload='auto' controls id='reproductorvideo' style='background-color:white;height:70%;width:70%; z-index:99999; position: fixed;top:15%; botton:15%;left:15%;right:15% margin: auto;'></video>";
-    }
-    else{
-    */
-    document.body.innerHTML += "<video autoplay  preload='auto' controls id='reproductorvideo' style='object-fit: fill;background-color:white;height:calc(100% - 65px );width:100%; z-index:5001; position: fixed;top:65px;'></video>";
-    //}
-    document.getElementById("search").disabled = true;
-    document.getElementById("search").value = nombreses[numerito];
-
-
-    document.getElementById("reproductorvideo").src = archivitos[numerito];
-    lastof = numerito;
-    document.getElementById("reproductor").pause();
-    document.getElementById("reproductorvideo").onended = function () {
-      quitarvideo();
-      //  lastof++;
-      reproducir(lastof + 1);
-      // document.getElementById("reproductorvideo").src=;
-
-
-    }
-    if ('mediaSession' in navigator) {
-
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: nombreses[lastof],
-        artist: linkeses[lastof],
-
-        artwork: [
-          { src: imaginacion[lastof], sizes: '96x96', type: 'image/png' },
-          { src: imaginacion[lastof], sizes: '128x128', type: 'image/png' },
-          { src: imaginacion[lastof], sizes: '192x192', type: 'image/png' },
-          { src: imaginacion[lastof], sizes: '256x256', type: 'image/png' },
-          { src: imaginacion[lastof], sizes: '384x384', type: 'image/png' },
-          { src: imaginacion[lastof], sizes: '512x512', type: 'image/png' },
-        ]
-      });
-    }
-    navigator.mediaSession.setActionHandler('previoustrack', function () {
-      // User clicked "Previous Track" media notification icon.
-      reproducir(lastof - 1);
-    });
-
-    navigator.mediaSession.setActionHandler('nexttrack', function () {
-      // User clicked "Next Track" media notification icon.
-      reproducir(lastof + 1);
-    });
-    var reproduc = document.getElementById("reproductorvideo");
-
-
-
-
-
-  }
-  function reproducir(texto) {
-
-
-    var numerito = 0;
-    if (texto.id == null) {
-      numerito = parseInt(texto);
-
-    } else {
-      numerito = parseInt(texto.id.toString().replace('r', ''))
-    }
-    document.getElementById('pillinn').innerText = "Multitube web ►" + nombreses[numerito].toString();
-    if (archivitos[numerito].endsWith(".mp3")) {
-
-
-
-
-
-
-
-
- 
-       document.getElementById("titulocancion").innerText=nombreses[numerito];
-       document.getElementById("imgcancion").src=imaginacion[numerito];
-   
-
-      document.getElementById("reproductor").src = archivitos[numerito];
-
-
-      lastof = numerito;
-      var img = document.getElementById('hiddenforever');
-      img.src = imaginacion[lastof];
-      img.onload = function () {
-
-        var colorThief = new ColorThief();
-        var coloreses = colorThief.getColor(img);
-        document.body.style = "margin-top: 65px;background-color: rgb(" + coloreses[0] + ", " + coloreses[1] + ", " + coloreses[2] + ");background-size:cover;content: '';z-index: -1;";
-
+      currentIndex = elements.findIndex(ax => ax.link == this.state.playingElement.link);
+      if (currentIndex >= 0) {
+        this.state.playingElement = elements[currentIndex + 1];
       }
-      // var myImage = URL.createObjectURL();
-
-
-
-
-
-      document.getElementById("reproductor").onended = function () {
-        if ((lastof + 1) <= archivitos.length) {
-
-          if (!archivitos[lastof + 1].endsWith('.mp4')) {
-
-            reproducir(lastof + 1);
-          }
-
-          //  document.body.style="margin-top: 65px;background-color: rgba(0, 0, 0, 0.295); background-image:url('"+imaginacion[lastof+1]+"');background-size:cover;content: '';z-index: -1;";
-          // lastof++;
-        }
-
-
-      };
-try{
+    },
+    playPrevious() {
+      let currentIndex = -1;
+      let elements = [];
+      if (this.state.selectedType == "mp3") {
+        elements = this.state.music;
+      } else {
+        elements = this.state.videos;
+      }
+      currentIndex = elements.findIndex(ax => ax.link == this.state.playingElement.link);
+      if (currentIndex > 0) {
+        this.state.playingElement = elements[currentIndex - 1];
+      }
+    },
+    playElement(element) {
+      this.state.playingElement = element;
+    },
+    updateMediaSession() {
       if ('mediaSession' in navigator) {
 
         navigator.mediaSession.metadata = new MediaMetadata({
-          title: nombreses[lastof],
-          artist: linkeses[lastof],
+          title: this.state.playingElement.name,
+          artist: this.state.playingElement.link,
 
-          artwork: [
-            { src: imaginacion[lastof], sizes: '96x96', type: 'image/png' },
-            { src: imaginacion[lastof], sizes: '128x128', type: 'image/png' },
-            { src: imaginacion[lastof], sizes: '192x192', type: 'image/png' },
-            { src: imaginacion[lastof], sizes: '256x256', type: 'image/png' },
-            { src: imaginacion[lastof], sizes: '384x384', type: 'image/png' },
-            { src: imaginacion[lastof], sizes: '512x512', type: 'image/png' },
+          artwork: [{
+              src: this.state.playingElement.image,
+              sizes: '96x96',
+              type: 'image/png'
+            },
+            {
+              src: this.state.playingElement.image,
+              sizes: '128x128',
+              type: 'image/png'
+            },
+            {
+              src: this.state.playingElement.image,
+              sizes: '192x192',
+              type: 'image/png'
+            },
+            {
+              src: this.state.playingElement.image,
+              sizes: '256x256',
+              type: 'image/png'
+            },
+            {
+              src: this.state.playingElement.image,
+              sizes: '384x384',
+              type: 'image/png'
+            },
+            {
+              src: this.state.playingElement.image,
+              sizes: '512x512',
+              type: 'image/png'
+            },
           ]
         });
       }
       navigator.mediaSession.setActionHandler('previoustrack', function () {
-        // User clicked "Previous Track" media notification icon.
-        reproducir(lastof - 1);
+        this.playPrevious();
       });
 
       navigator.mediaSession.setActionHandler('nexttrack', function () {
-        // User clicked "Next Track" media notification icon.
-        reproducir(lastof + 1);
+        this.playNext();
       });
-
-
-}catch(ex){}
-
-
-
-
-    } else
-      if (archivitos[numerito].endsWith(".mp4")) {
-
-
-        reproducirvideo(texto);
-
-
-      }
-
-    notificar(nombreses[numerito], linkeses[numerito], imaginacion[numerito]);
+    }
   }
+  new Vue({
+    el: '#app',
+    components: {
+      'player': httpVueLoader('--rootpath--/components/Player.vue'),
+      'nav-bar': httpVueLoader('--rootpath--/components/NavBar.vue'),
+      'preloader': httpVueLoader('--rootpath--/components/Preloader.vue'),
+      'library': httpVueLoader('--rootpath--/components/Library.vue'),
+      'bottom-bar': httpVueLoader('--rootpath--/components/BottomBar.vue')
+    }
+  });
+</script>
 
-
-
-   /* rawFile.send(null);
-      filtrar();
-    
-*/
-
-
-  function ponermusica() {
-    lastof = 0;
-    musica = true;
-    filtrar();
- 
-  }
-
-  function ponervideo() {
-    lastof = totalmusic + 1;
-    musica = false;
-    filtrar();
-
-  }
-
-  var encargar = function () {
-
-
-
+<script>
+  var loaded = function () {
     var reqo = new XMLHttpRequest();
     reqo.open('GET', "/&&querry&&meconecte", true);
     reqo.send();
 
   }
-  function abrirlink(contexto) {
-    var localization = contexto.id.replace('l', '');
-    window.open(linkeses[parseInt(localization)]);
-    setTimeout(function () { document.getElementById('reproductor').pause(); }, 500);
-  }
-
-function getrandom(){
-  return Math.random();
-}
-
-
-
-  window.onload = encargar;
-
- 
-
-
-
+  window.onload = loaded;
 </script>

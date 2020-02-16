@@ -29,39 +29,59 @@
         style="margin-top: 13px ;position: fixed;right:10px;"
         @click="next()"
       >skip_next</i>
+      <video
+        onload="initplayer()"
+        autoplay
+        preload="auto"
+        :class="is('.mp3')?'reproductor hide':'reproductor'"
+        id="reproductor"
+        controls
+        :src="getFile()"
+      />
     </div>
-
-    <audio autoplay preload="auto" class="reproductor" id="reproductor" :src="getFile()" />
   </div>
 </template>
 
 <script>
 module.exports = {
   name: "player",
-  data:()=>{
-      return{
-        shared:store.state
-      }
+  data: () => {
+    return {
+      shared: store.state
+    };
   },
   mounted() {
-    console.log("me monte");
-       initplayer();
+    initplayer();
   },
-  methods:{
-    getImage(){
-      return this.shared.playingElement != undefined ? this.shared.playingElement.image  : "";
+  methods: {
+    init() {},
+    getImage() {
+      return this.shared.playingElement != undefined
+        ? this.shared.playingElement.image
+        : "";
     },
-    getTitle(){
-      return this.shared.playingElement != undefined ? this.shared.playingElement.name  : "";
+    getTitle() {
+      return this.shared.playingElement != undefined
+        ? this.shared.playingElement.name
+        : "";
     },
-    getFile(){
-       return this.shared.playingElement != undefined ? this.shared.playingElement.file  : "";
+    getFile() {
+      return this.shared.playingElement != undefined
+        ? this.shared.playingElement.file
+        : "";
     },
-    next(){
-      store.playNext()
+    next() {
+      store.playNext();
     },
-    previous(){
+    previous() {
       store.playPrevious();
+    },
+    is(extension) {
+      if (this.getFile() == "") {
+        return true;
+      } else {
+        return this.getFile().includes(extension);
+      }
     }
   }
 };
@@ -71,10 +91,12 @@ module.exports = {
 .reproductor {
   z-index: 5000;
   position: fixed;
-  top: 90%;
-  display: flex;
+  right: 5px;
+  bottom: 132px;
+  display: initial;
   opacity: 1;
-  width: 100%;
-  height: 10%;
+  width: 45%;
+  max-width: 315px;
+  height: 170px;
 }
 </style>

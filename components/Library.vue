@@ -1,13 +1,20 @@
 <template>
   <div>
-   
-    <div class="scrollcampo row" id="scroll">
-      <div v-for="mus in shared.music" v-if="shared.selectedType == 'mp3'">
-        <media-card :library="mus"></media-card>
-         <h5>i love uuuuuuuu!!</h5>
-      </div>
-      <div v-for="vid in shared.videos" v-if="shared.selectedType == 'mp4'">
-        <media-card :library="vid"></media-card>
+    <preloader v-if="!isLoaded"></preloader>
+    <div class="scrollcampo row" id="scroll" v-if="isLoaded">
+      <div class="container">
+        <div v-if="shared.selectedType == 'mp3'">
+          <library-header :icon="'library_music'" :count="shared.music.length"></library-header>
+          <div v-for="mus in shared.music">
+            <media-card :library="mus"></media-card>
+          </div>
+        </div>
+        <div v-if="shared.selectedType == 'mp4'">
+          <library-header :icon="'video_library'" :count="shared.videos.length"></library-header>
+          <div v-for="vid in shared.videos">
+            <media-card :library="vid"></media-card>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -17,12 +24,15 @@
 module.exports = {
   name: "library",
   components: {
-    "media-card": httpVueLoader("--rootpath--/components/MediaCard.vue")
+    "media-card": httpVueLoader("--rootpath--/components/MediaCard.vue"),
+    "library-header": httpVueLoader(
+      "--rootpath--/components/LibraryTypeHeader.vue"
+    )
   },
   data: () => {
     return {
-      shared:store.state,
-      
+      shared: store.state,
+      isLoaded: false
     };
   },
   mounted() {
@@ -42,15 +52,16 @@ module.exports = {
         .get(file)
         .then(res => {
           if (type == "mp3") {
-            this.shared.music =this.decodeData(res.data) ;
+            this.shared.music = this.decodeData(res.data);
           } else {
             this.shared.videos = this.decodeData(res.data);
           }
         })
         .catch(error => {})
-        .then(() => {});
+        .then(() => {
+          this.isLoaded = true;
+        });
     },
-
     decodeData(data) {
       var parsedData = [];
 
@@ -88,9 +99,12 @@ module.exports = {
   left: 0px;
   right: 0px;
   top: 0px;
-  height: calc(100% - 177px);
-  width: 100%;
-  margin-top: 115px;
+  height: calc(100% - 215px);
+  width: 100vw;
+  margin-top: 75px;
   overflow: auto;
+}
+.body {
+  background-color: #f5f5f5;
 }
 </style>
