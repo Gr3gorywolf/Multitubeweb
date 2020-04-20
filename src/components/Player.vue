@@ -2,11 +2,11 @@
   <div>
     <div class="material-player white">
       <div class="barra"></div>
-      <progress class="progreso red prg" id="bar" value="0" max="100"></progress>
+      <progress class="progreso red prg" id="bar" @click="seek" value="0" max="100"></progress>
 
-      <img class="playingphoto" id="imgcancion" :src="getImage()" />
+      <img class="playingphoto" id="imgcancion" :src="playingImage" />
       <div class="titlecontainer">
-        <h6 class="black-text titulo" id="titulocancion">{{getTitle()}}</h6>
+        <h6 class="black-text titulo" id="titulocancion">{{playingTitle}}</h6>
         <h6 class="lightgray-text titulo2" id="time"></h6>
       </div>
 
@@ -14,74 +14,69 @@
         class="material-icons boton black-text"
         clickable
         style="margin-top: 13px ;position: fixed;right:68px;"
-        @click="previous()"
+        @click="playPrevious"
       >skip_previous</i>
       <i
         class="material-icons boton black-text"
         href="#"
         id="playpause"
-        onclick="playpause()"
+        @click="playpause"
         style="margin-top: 13px ;position: fixed;right:38px;"
       >play_arrow</i>
       <i
         class="material-icons boton black-text"
         href="#"
         style="margin-top: 13px ;position: fixed;right:10px;"
-        @click="next()"
+        @click="playNext"
       >skip_next</i>
       <video
-        onload="initplayer()"
         autoplay
         preload="auto"
         :class="is('.mp3')?'reproductor hide':'reproductor'"
         id="reproductor"
         controls
-        :src="getFile()"
+        :src="playingFile"
       />
     </div>
   </div>
 </template>
 
 <script>
-module.exports = {
+import { mapActions, mapGetters } from "vuex";
+import player from "../assets/js/player.js";
+export default {
   name: "player",
   data: () => {
-    return {
-      shared: store.state
-    };
+    return {};
   },
   mounted() {
-    initplayer();
+    // eslint-disable-next-line no-undef
+    window.onload = () => {};
+    this.init();
+  },
+  computed: {
+    ...mapGetters("current", ["playingImage", "playingTitle", "playingFile"])
   },
   methods: {
-    init() {},
-    getImage() {
-      return this.shared.playingElement != undefined
-        ? this.shared.playingElement.image
-        : "";
+    ...mapActions("library", ["playNext", "playPrevious"]),
+    init() {
+      player.initplayer();
     },
-    getTitle() {
-      return this.shared.playingElement != undefined
-        ? this.shared.playingElement.name
-        : "";
-    },
-    getFile() {
-      return this.shared.playingElement != undefined
-        ? this.shared.playingElement.file
-        : "";
-    },
-    next() {
-      store.playNext();
-    },
-    previous() {
-      store.playPrevious();
+    playpause() {
+      player.playpause();
     },
     is(extension) {
-      if (this.getFile() == "") {
+      if (this.playingFile == "") {
         return true;
       } else {
-        return this.getFile().includes(extension);
+        return this.playingFile.includes(extension);
       }
+    },
+    seek(event) {
+    
+      var percent = event.offsetX / this.$el.offsetWidth;
+        console.log(percent);
+      player.audio.currentTime = percent * player.audio.duration;
     }
   }
 };
@@ -95,8 +90,11 @@ module.exports = {
   bottom: 132px;
   display: initial;
   opacity: 1;
-  width: 45%;
+  width: 50%;
   max-width: 315px;
-  height: 170px;
+  height: 180px;
+}
+.boton{
+  cursor:pointer;
 }
 </style>

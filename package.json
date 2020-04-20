@@ -1,38 +1,48 @@
 {
-  "name": "multitubeweb",
-  "version": "1.0.0",
-  "description": "A multitube streaming server frontend",
-  "main": "index.js",
+  "name": "multitube-web",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "node scripts/dev.js",
-    "prod": "node scripts/prod.js"
+    "serve": "vue-cli-service serve --mode=development",
+    "build": "vue-cli-service build --mode=production",
+    "lint": "vue-cli-service lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Gr3gorywolf/Multitubeweb.git"
-  },
-  "author": "GR3",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Gr3gorywolf/Multitubeweb/issues"
-  },
-  "homepage": "https://github.com/Gr3gorywolf/Multitubeweb#readme",
-  "directories": [
-    "js/",
-    "imgs/",
-    "components/",
-    "css/"
-  ],
-  "files": [
-    "index.html",
-    "lista.png",
-    "playcircle.png"
-  ],
   "dependencies": {
-    "filewatcher": "^3.0.1",
-    "fs": "0.0.1-security",
-    "live-server": "^1.2.1",
-    "path": "^0.12.7",
-    "recursive-readdir": "^2.2.2"
-  }
+    "axios": "^0.19.2",
+    "core-js": "^3.6.4",
+    "material-design-icons": "^3.0.1",
+    "materialize-css": "^1.0.0",
+    "vue": "^2.6.11",
+    "vue-plugin-load-script": "^1.2.0",
+    "vue-router": "^3.1.6"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.3.0",
+    "@vue/cli-plugin-eslint": "^4.3.0",
+    "@vue/cli-plugin-router": "^4.3.1",
+    "@vue/cli-service": "^4.3.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
 }

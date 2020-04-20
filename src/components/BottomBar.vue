@@ -3,10 +3,11 @@
 <footer class="page-footer red" style="position: fixed;bottom:0px;width:100%;">
   <div class="col s12" style="padding-left:0px!important;padding-right:0px!important;">
     <ul class="tabs tabs-fixed-width transparent white-text" id="tabs" >
-      <li class="tab col s3" v-for="sec in sections">
+      <li class="tab col s3" v-for="sec in sections" :key="sec.id">
         <a  style="cursor: pointer;" class="white-text" @click="setType(sec)">
           <i class="material-icons" >{{ sec.icon }}</i><br>
         </a>
+      </li>
     </ul>
   </div>
 </footer>
@@ -15,11 +16,12 @@
 </template>
 
 <script>
-module.exports = {
+import M from 'materialize-css'
+import {mapGetters,mapActions} from 'vuex'
+export default  {
 name:"bottom-bar",
 data:()=>{
   return{ 
-    shared:store.state,
     sections:[
        {
          id:0,
@@ -35,16 +37,21 @@ data:()=>{
     ]
   }
 },
+computed:{
+ ...mapGetters("library",["selectedType"])
+},
 mounted() {
+    // eslint-disable-next-line no-unused-vars
     var instance = M.Tabs.init(document.getElementById("tabs"), {});
 },
 methods: {
+  ...mapActions("library",["selectType"]),
   setType(section){
     if(section.id == 0){
-      this.shared.selectedType='mp3'
+      this.selectType('mp3');
     }
     if(section.id == 1){
-      this.shared.selectedType='mp4'
+      this.selectType('mp4');
     }
    
   }

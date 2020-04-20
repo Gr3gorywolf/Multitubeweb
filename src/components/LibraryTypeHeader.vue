@@ -8,7 +8,7 @@
 </template>
 
 <script>
-module.exports = {
+export default  {
   name: "library-header",
   props: {
     count: Number,

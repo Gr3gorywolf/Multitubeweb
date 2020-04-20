@@ -5,7 +5,7 @@
           <a class="brand-logo center">
       <form class="center">
         <div class="input-field">
-          <input id="search" v-model="shared.filter"  type="search" name="search"
+          <input id="search"   type="search" name="search"
             placeholder="Buscar" style="background-color: white;color: black;">
           <label class="label-icon" for="search"><i class="material-icons black-text"
               style="margin-top: 0px">search</i></label>
@@ -19,13 +19,8 @@
 </template>
 
 <script>
-module.exports = {
+export default  {
   name: "nav-bar",
-  data:()=>{
-    return{
-     shared:store.state
-    }
-  }
 };
 </script>
 
