@@ -25,6 +25,7 @@ import LibraryHeader from "../components/LibraryTypeHeader";
 import {mapGetters,mapActions} from "vuex";
 export default  {
   name: "library",
+  props:['selectedType'],
   components: {
     LibraryTable,
     LibraryHeader
@@ -35,7 +36,7 @@ export default  {
     };
   },
   computed:{
-    ...mapGetters("library",["music","videos","selectedType"])
+    ...mapGetters("library",["music","videos"])
   },
   mounted() {
     this.fetchMedia("mp3");
@@ -43,6 +44,11 @@ export default  {
   },
   methods: { 
   ...mapActions("library",["fetchMedia"])
+  },
+  watch:{
+    selectedType(){
+      this.$store.dispatch('library/selectType',this.selectedType);
+    }
   }
 };
 </script>
@@ -55,7 +61,7 @@ export default  {
   left: 0px;
   right: 0px;
   top: 0px;
-  height: calc(100% - 215px);
+  height: calc(100% - 75px);
   width: 100vw;
   margin-top: 75px;
   overflow: auto;

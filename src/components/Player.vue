@@ -50,8 +50,9 @@ export default {
     return {};
   },
   mounted() {
-    // eslint-disable-next-line no-undef
-    window.onload = () => {};
+    window.onload = () => {
+         
+    };
     this.init();
   },
   computed: {
@@ -87,7 +88,7 @@ export default {
   z-index: 5000;
   position: fixed;
   right: 5px;
-  bottom: 132px;
+  bottom: 69px;
   display: initial;
   opacity: 1;
   width: 50%;

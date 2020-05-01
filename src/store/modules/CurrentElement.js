@@ -21,6 +21,11 @@ const mutations = {
 }
 const getters = {
    
+    playingLink() {
+        return state.playingElement != undefined
+            ? state.playingElement.link
+            : "";
+    },
     playingImage() {
         return state.playingElement != undefined
             ? state.playingElement.image
@@ -41,10 +46,17 @@ const getters = {
 }
 
 const actions = {
-    playElement({commit}, element) {
+    playElement({commit,dispatch}, element) {
+        commit("setElement",{
+            image: "",
+            link: "",
+            name: "",
+            file:""
+        });
         commit("setElement",element);
+        dispatch("updateMediaSession");
     },
-    updateMediaSession() {
+    updateMediaSession({dispatch}) {
         if ('mediaSession' in navigator) {
 
             // eslint-disable-next-line no-undef
@@ -86,10 +98,12 @@ const actions = {
             });
         }
         navigator.mediaSession.setActionHandler('previoustrack', function () {
+            dispatch("library/playPrevious",null,{root:true});
             //  this.playPrevious();
         });
 
         navigator.mediaSession.setActionHandler('nexttrack', function () {
+            dispatch("library/playNext",null,{root:true});
             // this.playNext();
         });
     }

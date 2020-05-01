@@ -1,11 +1,6 @@
+import Library from '../../pages/Library.vue';
+ 
+export const routes = [
 
-
-export default {
-    routes
-}
-
-
-const routes = [
-
-    {path:"music", name:"music",component:""} 
+    {path:"/library/:selectedType", name:"library",component:Library,props:true}
 ]

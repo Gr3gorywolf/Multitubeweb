@@ -22,6 +22,9 @@ const mutations = {
 
 }
 const getters = {
+    playingLink (state, getters, rootState, rootGetters) {
+       return rootGetters['current/playingLink'];
+      },
     selectedType() {
         return state.selectedType;
     },
@@ -65,30 +68,30 @@ const actions = {
     },
     // eslint-disable-next-line no-unused-vars
   
-    playNext() {
+    playNext({dispatch,getters}) {
         let currentIndex = -1;
         let elements = [];
-        if (this.state.selectedType == "mp3") {
-            elements = this.state.music;
+        if (state.selectedType == "mp3") {
+            elements = state.music;
         } else {
-            elements = this.state.videos;
+            elements = state.videos;
         }
-        currentIndex = elements.findIndex(ax => ax.link == this.state.playingElement.link);
-        if (currentIndex >= 0) {
-            this.state.playingElement = elements[currentIndex + 1];
+        currentIndex = elements.findIndex(ax => ax.link == getters.playingLink);
+        if (elements[currentIndex+1] != undefined) {
+            dispatch("current/playElement",elements[currentIndex + 1],{root:true});
         }
     },
-    playPrevious() {
+    playPrevious({dispatch,getters}) {
         let currentIndex = -1;
         let elements = [];
-        if (this.state.selectedType == "mp3") {
-            elements = this.state.music;
+        if (state.selectedType == "mp3") {
+            elements = state.music;
         } else {
-            elements = this.state.videos;
+            elements = state.videos;
         }
-        currentIndex = elements.findIndex(ax => ax.link == this.state.playingElement.link);
-        if (currentIndex > 0) {
-            this.state.playingElement = elements[currentIndex - 1];
+        currentIndex = elements.findIndex(ax => ax.link == getters.playingLink);
+        if (elements[currentIndex-1] != undefined ) {
+            dispatch("current/playElement",elements[currentIndex - 1],{root:true});
         }
     }
 
